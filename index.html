@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       color: #333;
     }
 
@@ -39,8 +39,8 @@
     }
 
     .question {
-      display: none;
       margin-bottom: 30px;
+      animation: fadeIn 0.6s ease;
     }
 
     .question h4 {
@@ -119,7 +119,7 @@
 </head>
 <body>
   <div class="container">
-    <h2>樂芙沫戀愛代表人物測驗 💘</h2>
+    <h2>戀愛代表人物測驗 💘</h2>
     <div id="intro">
       <p>透過這些問題，找出你最像哪位《排球少年》的戀愛代表人物！</p>
       <button onclick="startQuiz()">開始測驗</button>
@@ -127,7 +127,6 @@
 
     <div id="progressBar"><div id="progress"></div></div>
 
-    <!-- 問題會用 JS 動態顯示 -->
     <div id="questionContainer"></div>
 
     <div id="resultCard">
