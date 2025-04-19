@@ -25,12 +25,6 @@
       max-width: 800px;
       width: 90%;
       text-align: center;
-      animation: fadeIn 1.2s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
@@ -68,32 +62,6 @@
       background-color: #f39ab9;
     }
 
-    #progressBar {
-      height: 10px;
-      background-color: #ffdbe9;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 20px 0;
-    }
-
-    #progress {
-      height: 100%;
-      width: 0;
-      background-color: #ff88a2;
-      transition: width 0.5s ease;
-    }
-
-    #resultCard {
-      display: none;
-      background: #fff;
-      color: #333;
-      padding: 25px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-      border: 2px solid #ffe0f0;
-      margin-top: 20px;
-      animation: fadeIn 1.2s ease;
-    }
   </style>
 </head>
 <body>
@@ -104,38 +72,24 @@
       <button onclick="startQuiz()">開始測驗</button>
     </div>
 
-    <div id="progressBar"><div id="progress"></div></div>
-
     <!-- 問題會用 JS 動態顯示 -->
     <div id="questionContainer"></div>
 
-    <div id="resultCard">
-      <div class="result-title" id="resultTitle"></div>
-      <div class="result-desc" id="resultDesc"></div>
-      <button onclick="resetQuiz()">重新測驗</button>
-    </div>
   </div>
 
   <script>
     const questions = [
       ["你最喜歡的告白方式是？", ["直接當面說出來！", "寫卡片慢慢傳達", "搞笑中突然認真", "假裝不經意地提起"]],
       ["在戀愛中，你會更在意對方的哪一點？", ["對方是否能理解我", "對方的幽默感", "對方的勇氣和決心", "對方的真誠和穩重"]],
-      ["當你遇到困難時，你會怎麼做？", ["自己想辦法解決", "找朋友幫忙", "努力維持冷靜", "跟著直覺走"]],
-      ["你的朋友會形容你是怎樣的人？", ["活潑有活力", "冷靜理智", "溫柔體貼", "自信又可靠"]],
-      ["如果你和對方有誤會，通常會怎麼處理？", ["直接溝通解開誤會", "選擇沉默等時間沖淡", "先冷靜一段時間再談", "努力保持幽默氣氛化解尷尬"]],
-      ["在戀愛中，你喜歡的是什麼樣的氛圍？", ["浪漫又熱情", "穩定而平靜", "搞笑又輕鬆", "溫馨而貼心"]],
-      ["你面對挑戰時的態度是？", ["迎難而上，努力克服", "分析情況，再做決定", "保持冷靜，逐步處理", "接受挑戰，讓自己成長"]],
-      ["你認為戀愛最重要的是？", ["彼此的理解和包容", "共同的幽默感", "信任和支持", "共同的夢想與目標"]],
-      ["當你與愛人出現分歧時，你通常會怎麼處理？", ["坦誠溝通", "等待對方先開口", "尋找妥協的辦法", "盡量保持冷靜，稍後再談"]],
-      ["你喜歡的約會方式是？", ["戶外冒險，挑戰極限", "安靜的咖啡廳，兩人對話", "一起看電影，輕鬆度過", "去遊樂園，享受快樂的時光"]]
+      ["你喜歡的約會活動是？", ["浪漫的晚餐", "一起看電影或看展覽", "去戶外探險或旅行", "在家一起煮飯或玩遊戲"]],
+      ["遇到困難時，你會怎麼做？", ["不服輸，努力克服", "尋求他人的幫助", "保持樂觀，等機會", "冷靜思考，找出解決方案"]],
+      ["你對戀愛的態度是？", ["積極主動，爭取自己想要的", "自然發展，不強求", "以開玩笑的態度面對", "保持理智，細心考慮"]],
+      ["如果戀愛關係遇到問題，你會？", ["直接討論，解決問題", "默默承受，等待時機", "用幽默化解尷尬", "先冷靜再決定是否溝通"]],
+      ["你在戀愛中最看重的是？", ["信任和溝通", "情趣和趣味", "陪伴和支持", "彼此獨立的空間"]],
+      ["在戀愛中，你更願意扮演哪種角色？", ["積極主動，掌控局面", "隨和，跟隨對方的步伐", "帶來快樂和幽默", "提供穩定和支持"]],
+      ["當你看到對方有不開心的時候，你會怎麼做？", ["安慰並鼓勵對方", "開玩笑逗對方開心", "給對方空間，等對方自己好起來", "耐心聆聽，了解對方的困難"]],
+      ["當戀愛關係不如預期時，你會選擇？", ["直接坦白，讓問題得到解決", "耐心等待，讓情感自然流動", "調整心態，保持樂觀", "選擇暫時冷靜，重新審視關係"]]
     ];
-
-    const results = {
-      A: { name: "日向翔陽", desc: "你像日向翔陽，總是充滿活力，積極主動。在戀愛中，你是那個會不顧一切去爭取自己愛的人！" },
-      B: { name: "影山飛雄", desc: "你像影山飛雄，雖然有些內向和高冷，但實際上很重視關係的深度。" },
-      C: { name: "孤爪研磨", desc: "你像研磨，細膩敏感，總是觀察入微。在戀愛中你會默默守護對方。" },
-      D: { name: "黑尾鐵朗", desc: "你像黑尾，自信又可靠，是戀愛中的大哥哥角色。你能帶給對方安穩又開心的氛圍。" }
-    };
 
     let current = 0;
     let answers = [];
@@ -147,71 +101,29 @@
 
     function showQuestion() {
       const container = document.getElementById("questionContainer");
-      container.innerHTML = '';  // 清空先前的內容
+      container.innerHTML = '';
 
       const q = questions[current];
       const qDiv = document.createElement("div");
       qDiv.className = "question";
       qDiv.innerHTML = `<h4>${current + 1}. ${q[0]}</h4>`;
-      
       q[1].forEach((text, index) => {
         const btn = document.createElement("button");
-        const choice = ["A", "B", "C", "D"][index];
         btn.innerText = text;
-        btn.onclick = () => selectAnswer(choice);
+        btn.onclick = () => selectAnswer(index);
         qDiv.appendChild(btn);
       });
-      
       container.appendChild(qDiv);
-      container.style.display = "block";  // 顯示問題
-      updateProgress();
     }
 
-    function selectAnswer(choice) {
-      answers.push(choice);
+    function selectAnswer(index) {
+      answers.push(index);
       current++;
       if (current < questions.length) {
         showQuestion();
       } else {
-        calculateResult();
+        alert("測驗結束！答案已選擇。");
       }
-    }
-
-    function updateProgress() {
-      const progress = document.getElementById("progress");
-      progress.style.width = `${(current / questions.length) * 100}%`;
-    }
-
-    function calculateResult() {
-      const container = document.getElementById("questionContainer");
-      container.innerHTML = `
-        <h4>正在計算結果...</h4>
-      `;
-      updateProgress();
-
-      setTimeout(() => {
-        const count = { A: 0, B: 0, C: 0, D: 0 };
-        answers.forEach(ans => count[ans]++);
-        const final = Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
-        showResult(final);
-      }, 2000); // 2 秒後顯示結果
-    }
-
-    function showResult(type) {
-      const data = results[type];
-      document.getElementById("questionContainer").style.display = "none";
-      document.getElementById("resultTitle").innerText = data.name;
-      document.getElementById("resultDesc").innerText = data.desc;
-      document.getElementById("resultCard").style.display = "block";
-    }
-
-    function resetQuiz() {
-      current = 0;
-      answers = [];
-      document.getElementById("resultCard").style.display = "none";
-      document.getElementById("questionContainer").style.display = "block";
-      document.getElementById("intro").style.display = "block";
-      document.getElementById("progress").style.width = "0%";
     }
   </script>
 </body>
