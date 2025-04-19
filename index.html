@@ -61,13 +61,11 @@
       width: 80%;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     button:hover {
       transform: scale(1.05);
       background-color: #f39ab9;
-      box-shadow: 0 0 10px #ffd6e8;
     }
 
     #progressBar {
@@ -96,47 +94,6 @@
       margin-top: 20px;
       animation: fadeIn 1.2s ease;
     }
-
-    .result-title {
-      font-size: 24px;
-      font-weight: bold;
-      color: #d15e8b;
-      margin-bottom: 10px;
-    }
-
-    .result-desc {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .quote {
-      font-size: 16px;
-      font-style: italic;
-      color: #666;
-      margin-bottom: 15px;
-    }
-
-    .dot {
-      animation: blink 1.2s infinite;
-      opacity: 0;
-    }
-
-    .dot:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .dot:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    .dot:nth-child(4) {
-      animation-delay: 0.6s;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0; }
-      50% { opacity: 1; }
-    }
   </style>
 </head>
 <body>
@@ -155,46 +112,29 @@
     <div id="resultCard">
       <div class="result-title" id="resultTitle"></div>
       <div class="result-desc" id="resultDesc"></div>
-      <div class="quote" id="resultQuote"></div>
       <button onclick="resetQuiz()">重新測驗</button>
     </div>
   </div>
 
   <script>
     const questions = [
-      ["你最喜歡的告白方式是？", ["直接當面說出來！", "寫卡片慢慢傳達", "搞笑中突然認真", "假裝不經意地提起"]], 
-      ["在戀愛中，你會更在意對方的哪一點？", ["對方是否能理解我", "對方的幽默感", "對方的勇氣和決心", "對方的真誠和穩重"]], 
-      ["你喜歡的約會活動是？", ["浪漫的晚餐", "一起看電影或看展覽", "去戶外探險或旅行", "在家一起煮飯或玩遊戲"]], 
-      ["遇到困難時，你會怎麼做？", ["不服輸，努力克服", "尋求他人的幫助", "保持樂觀，等機會", "冷靜思考，找出解決方案"]], 
-      ["你對戀愛的態度是？", ["積極主動，爭取自己想要的", "自然發展，不強求", "以開玩笑的態度面對", "保持理智，細心考慮"]], 
-      ["如果戀愛關係遇到問題，你會？", ["直接討論，解決問題", "默默承受，等待時機", "用幽默化解尷尬", "先冷靜再決定是否溝通"]], 
-      ["你在戀愛中最看重的是？", ["信任和溝通", "情趣和趣味", "陪伴和支持", "彼此獨立的空間"]], 
-      ["在戀愛中，你更願意扮演哪種角色？", ["積極主動，掌控局面", "隨和，跟隨對方的步伐", "帶來快樂和幽默", "提供穩定和支持"]], 
-      ["當你看到對方有不開心的時候，你會怎麼做？", ["安慰並鼓勵對方", "開玩笑逗對方開心", "給對方空間，等對方自己好起來", "耐心聆聽，了解對方的困難"]], 
-      ["當戀愛關係不如預期時，你會選擇？", ["直接坦白，讓問題得到解決", "耐心等待，讓情感自然流動", "調整心態，保持樂觀", "選擇暫時冷靜，重新審視關係"]]
+      ["你最喜歡的告白方式是？", ["直接當面說出來！", "寫卡片慢慢傳達", "搞笑中突然認真", "假裝不經意地提起"]],
+      ["在戀愛中，你會更在意對方的哪一點？", ["對方是否能理解我", "對方的幽默感", "對方的勇氣和決心", "對方的真誠和穩重"]],
+      ["當你遇到困難時，你會怎麼做？", ["自己想辦法解決", "找朋友幫忙", "努力維持冷靜", "跟著直覺走"]],
+      ["你的朋友會形容你是怎樣的人？", ["活潑有活力", "冷靜理智", "溫柔體貼", "自信又可靠"]],
+      ["如果你和對方有誤會，通常會怎麼處理？", ["直接溝通解開誤會", "選擇沉默等時間沖淡", "先冷靜一段時間再談", "努力保持幽默氣氛化解尷尬"]],
+      ["在戀愛中，你喜歡的是什麼樣的氛圍？", ["浪漫又熱情", "穩定而平靜", "搞笑又輕鬆", "溫馨而貼心"]],
+      ["你面對挑戰時的態度是？", ["迎難而上，努力克服", "分析情況，再做決定", "保持冷靜，逐步處理", "接受挑戰，讓自己成長"]],
+      ["你認為戀愛最重要的是？", ["彼此的理解和包容", "共同的幽默感", "信任和支持", "共同的夢想與目標"]],
+      ["當你與愛人出現分歧時，你通常會怎麼處理？", ["坦誠溝通", "等待對方先開口", "尋找妥協的辦法", "盡量保持冷靜，稍後再談"]],
+      ["你喜歡的約會方式是？", ["戶外冒險，挑戰極限", "安靜的咖啡廳，兩人對話", "一起看電影，輕鬆度過", "去遊樂園，享受快樂的時光"]]
     ];
 
     const results = {
-      A: {
-        name: "日向翔陽",
-        desc: "你像日向翔陽，總是充滿活力，積極主動。在戀愛中，你是那個會不顧一切去爭取自己愛的人！",
-        quote: "「即使再小的努力，也要堅持下去！」"
-      },
-      B: {
-        name: "影山飛雄",
-        desc: "你像影山飛雄，雖然有些內向和高冷，但實際上很重視關係的深度。",
-        quote: "「我不是不想，我只是不知道怎麼做。」"
-      },
-      C: {
-        name: "孤爪研磨",
-        desc: "你像研磨，細膩敏感，總是觀察入微。在戀愛中你會默默守護對方。",
-        quote: "「我不是不喜歡人，只是不太習慣接觸。」"
-      },
-      D: {
-        name: "黑尾鐵朗",
-        desc: "你像黑尾，自信又可靠，是戀愛中的大哥哥角色。你能帶給對方安穩又開心的氛圍。",
-        quote: "「保持步調一致，就能打出漂亮的節奏。」"
-      }
+      A: { name: "日向翔陽", desc: "你像日向翔陽，總是充滿活力，積極主動。在戀愛中，你是那個會不顧一切去爭取自己愛的人！" },
+      B: { name: "影山飛雄", desc: "你像影山飛雄，雖然有些內向和高冷，但實際上很重視關係的深度。" },
+      C: { name: "孤爪研磨", desc: "你像研磨，細膩敏感，總是觀察入微。在戀愛中你會默默守護對方。" },
+      D: { name: "黑尾鐵朗", desc: "你像黑尾，自信又可靠，是戀愛中的大哥哥角色。你能帶給對方安穩又開心的氛圍。" }
     };
 
     let current = 0;
@@ -221,7 +161,7 @@
         qDiv.appendChild(btn);
       });
       container.appendChild(qDiv);
-      container.style.display = "block";  // 確保問題顯示出來
+      container.style.display = "block";  // 顯示問題
       updateProgress();
     }
 
@@ -243,7 +183,7 @@
     function calculateResult() {
       const container = document.getElementById("questionContainer");
       container.innerHTML = `
-        <h4>正在計算結果<span class="dot">.</span><span class="dot">.</span><span class="dot">.</span></h4>
+        <h4>正在計算結果...</h4>
       `;
       updateProgress();
 
@@ -260,7 +200,6 @@
       document.getElementById("questionContainer").style.display = "none";
       document.getElementById("resultTitle").innerText = data.name;
       document.getElementById("resultDesc").innerText = data.desc;
-      document.getElementById("resultQuote").innerText = data.quote;
       document.getElementById("resultCard").style.display = "block";
     }
 
@@ -275,5 +214,3 @@
   </script>
 </body>
 </html>
-
-
