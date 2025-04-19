@@ -4,85 +4,110 @@
     <meta charset="UTF-8">
     <title>戀愛代表人物測驗</title>
     <style>
-        body { font-family: sans-serif; padding: 30px; max-width: 600px; margin: auto; }
-        .question { margin-bottom: 20px; }
-        button { margin: 5px; padding: 8px 12px; font-size: 14px; }
-        #result { font-weight: bold; color: darkred; margin-top: 20px; white-space: pre-line; }
-        #actions { margin-top: 20px; }
+        body {
+            font-family: 'Arial', sans-serif;
+            padding: 30px;
+            background-color: #f0e6f7; /* 背景顏色 */
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://via.placeholder.com/1500'); /* 背景圖片 */
+            background-size: cover;
+        }
+        .container {
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+        h2 {
+            text-align: center;
+            font-size: 32px;
+            color: #5e2b8d; /* 標題顏色 */
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        button {
+            margin: 5px;
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #6a1b9a; /* 按鈕顏色 */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        button:hover {
+            background-color: #9c4dcc; /* 按鈕懸停顏色 */
+            transform: scale(1.05);
+        }
+        #result {
+            font-weight: bold;
+            color: darkred;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #actions {
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <h2>戀愛代表人物測驗 💘</h2>
+    <div class="container">
+        <h2>戀愛代表人物測驗 💘</h2>
 
-    <div class="question" id="question-container"></div>
+        <div class="question" id="q1">
+            <h4>1. 你最喜歡的約會方式是？</h4>
+            <button onclick="selectAnswer(1, 'A')">A. 一起去看電影</button>
+            <button onclick="selectAnswer(1, 'B')">B. 隨便走走</button>
+            <button onclick="selectAnswer(1, 'C')">C. 有趣的驚喜</button>
+            <button onclick="selectAnswer(1, 'D')">D. 一起煮飯</button>
+        </div>
 
-    <div id="result"></div>
-    <div id="actions" style="display:none;">
-        <button onclick="copyResult()">📋 複製分享文字</button>
-        <button onclick="resetQuiz()">🔁 重新測驗</button>
+        <div class="question" id="q2" style="display:none;">
+            <h4>2. 你喜歡哪種戀愛風格？</h4>
+            <button onclick="selectAnswer(2, 'A')">A. 強勢又有主見</button>
+            <button onclick="selectAnswer(2, 'B')">B. 貼心又細心</button>
+            <button onclick="selectAnswer(2, 'C')">C. 浪漫又搞笑</button>
+            <button onclick="selectAnswer(2, 'D')">D. 穩重又溫暖</button>
+        </div>
+
+        <div class="question" id="q3" style="display:none;">
+            <h4>3. 愛情對你來說是？</h4>
+            <button onclick="selectAnswer(3, 'A')">A. 共同前進</button>
+            <button onclick="selectAnswer(3, 'B')">B. 相互照顧</button>
+            <button onclick="selectAnswer(3, 'C')">C. 浪漫童話</button>
+            <button onclick="selectAnswer(3, 'D')">D. 安定生活</button>
+        </div>
+
+        <div id="result"></div>
+        <div id="actions" style="display:none;">
+            <button onclick="copyResult()">📋 複製分享文字</button>
+            <button onclick="resetQuiz()">🔁 重新測驗</button>
+        </div>
     </div>
 
     <script>
-        const questions = [
-            { q: "1. 你最喜歡的約會方式是？", options: {
-                A: "一起去看電影", B: "隨便走走", C: "有趣的驚喜", D: "一起煮飯" } },
-            { q: "2. 你喜歡哪種戀愛風格？", options: {
-                A: "強勢又有主見", B: "貼心又細心", C: "浪漫又搞笑", D: "穩重又溫暖" } },
-            { q: "3. 愛情對你來說是？", options: {
-                A: "共同前進", B: "相互照顧", C: "浪漫童話", D: "安定生活" } },
-            { q: "4. 你在吵架時會？", options: {
-                A: "講道理解決", B: "冷靜後和好", C: "鬧一鬧又好回來", D: "盡量避免衝突" } },
-            { q: "5. 你最不能接受另一半什麼？", options: {
-                A: "沒想法", B: "不貼心", C: "無趣", D: "不穩定" } },
-            { q: "6. 你對「曖昧」的看法是？", options: {
-                A: "要快狠準", B: "慢慢了解", C: "曖昧最美", D: "確定再靠近" } },
-            { q: "7. 理想情人最吸引你的是？", options: {
-                A: "有目標有熱情", B: "善解人意", C: "愛玩會逗我笑", D: "成熟穩定" } },
-            { q: "8. 你在戀愛中是？", options: {
-                A: "主導一切", B: "全心付出", C: "情緒派", D: "低調穩重" } },
-            { q: "9. 如果感情遇到危機，你會？", options: {
-                A: "討論解決問題", B: "主動安撫對方", C: "先逃避一下", D: "冷靜分析再決定" } },
-            { q: "10. 你的戀愛口頭禪可能是？", options: {
-                A: "走吧，我帶你去", B: "你今天累不累？", C: "有驚喜要給你～", D: "別擔心，我在" } }
-        ];
-
-        const results = {
-            A: "勇敢的領導者 🦁\n你是天生的主導者，熱情、果斷，戀愛中喜歡主動出擊，是戀人心中的超級英雄！",
-            B: "溫柔的守護者 🐻\n你溫暖體貼，總是默默守護對方，是最有安全感的戀人典範～",
-            C: "浪漫的夢想家 🦄\n你充滿想像力與浪漫情懷，對愛情抱有童話般的憧憬，是浪漫派的代表！",
-            D: "安穩的陪伴者 🐢\n你重視穩定與陪伴，是可以長久走下去的戀人，像家人一樣溫暖～"
-        };
-
-        let currentQuestion = 0;
         let answers = [];
         let finalResult = '';
 
-        function renderQuestion() {
-            const container = document.getElementById("question-container");
-            container.innerHTML = '';
+        function selectAnswer(qNum, choice) {
+            answers[qNum - 1] = choice;
+            document.getElementById('q' + qNum).style.display = 'none';
 
-            if (currentQuestion < questions.length) {
-                const q = questions[currentQuestion];
-                const qElem = document.createElement('div');
-                qElem.innerHTML = `<h4>${q.q}</h4>`;
-
-                for (let key in q.options) {
-                    const btn = document.createElement('button');
-                    btn.innerText = `${key}. ${q.options[key]}`;
-                    btn.onclick = () => selectAnswer(key);
-                    qElem.appendChild(btn);
-                }
-
-                container.appendChild(qElem);
+            if (qNum < 3) {
+                document.getElementById('q' + (qNum + 1)).style.display = 'block';
             } else {
                 showResult();
             }
-        }
-
-        function selectAnswer(choice) {
-            answers.push(choice);
-            currentQuestion++;
-            renderQuestion();
         }
 
         function showResult() {
@@ -98,31 +123,36 @@
                 }
             }
 
+            const results = {
+                A: '勇敢的領導者 🦁',
+                B: '溫柔的守護者 🐻',
+                C: '浪漫的夢想家 🦄',
+                D: '安穩的陪伴者 🐢'
+            };
+
             finalResult = results[resultKey];
-            document.getElementById("question-container").style.display = "none";
-            document.getElementById("result").innerText = "你的戀愛代表人物是：\n\n" + finalResult;
-            document.getElementById("actions").style.display = "block";
+            document.getElementById('result').innerText = "你的戀愛代表人物是：" + finalResult;
+            document.getElementById('actions').style.display = 'block';
         }
 
         function copyResult() {
-            const text = "我在戀愛代表人物測驗中是：\n" + finalResult + "\n快來測你的！";
+            const text = "我在戀愛代表人物測驗中是：" + finalResult + "，快來測你的！";
             navigator.clipboard.writeText(text).then(() => {
                 alert("已複製分享文字！");
             });
         }
 
         function resetQuiz() {
-            currentQuestion = 0;
             answers = [];
             finalResult = '';
-            document.getElementById("question-container").style.display = "block";
-            document.getElementById("result").innerText = '';
-            document.getElementById("actions").style.display = "none";
-            renderQuestion();
-        }
+            document.getElementById('result').innerText = '';
+            document.getElementById('actions').style.display = 'none';
 
-        // 啟動測驗
-        renderQuestion();
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('q' + i).style.display = (i === 1) ? 'block' : 'none';
+            }
+        }
     </script>
 </body>
 </html>
+
