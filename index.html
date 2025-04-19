@@ -9,7 +9,7 @@
             font-family: 'Arial', sans-serif;
             padding: 30px;
             margin: 0;
-            background-color: #FFC0CB; /* 設置粉色背景 */
+            background-color: #FFC0CB; /* 粉色背景 */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -166,6 +166,7 @@
     <div class="container">
         <h2>戀愛代表人物測驗 💘</h2>
 
+        <!-- 顯示測驗敘述 -->
         <p class="intro">這是一個輕鬆有趣的戀愛測驗，幫助你發現自己在戀愛中最具代表性的角色。每個問題的答案會對應到你戀愛風格的不同面向，讓我們一起來探索吧！</p>
 
         <!-- 問題 1 -->
@@ -177,86 +178,7 @@
             <button onclick="selectAnswer(1, 'D')">D. 一起煮飯</button>
         </div>
 
-        <!-- 問題 2 -->
-        <div class="question" id="q2" style="display:none;">
-            <h4>2. 在愛情中，有時候是一場小小的爭執，也能讓彼此的心更加靠近。你喜歡哪種戀愛風格呢？</h4>
-            <button onclick="selectAnswer(2, 'A')">A. 強勢又有主見</button>
-            <button onclick="selectAnswer(2, 'B')">B. 貼心又細心</button>
-            <button onclick="selectAnswer(2, 'C')">C. 浪漫又搞笑</button>
-            <button onclick="selectAnswer(2, 'D')">D. 穩重又溫暖</button>
-        </div>
-
-        <!-- 問題 3 -->
-        <div class="question" id="q3" style="display:none;">
-            <h4>3. 你和對方的愛情是怎樣的？是像童話般的浪漫，還是現實中的平凡卻又充滿溫暖？</h4>
-            <button onclick="selectAnswer(3, 'A')">A. 共同前進</button>
-            <button onclick="selectAnswer(3, 'B')">B. 相互照顧</button>
-            <button onclick="selectAnswer(3, 'C')">C. 浪漫童話</button>
-            <button onclick="selectAnswer(3, 'D')">D. 安定生活</button>
-        </div>
-
-        <!-- 問題 4 -->
-        <div class="question" id="q4" style="display:none;">
-            <h4>4. 當你和對方有一些不愉快時，你會怎麼處理？</h4>
-            <button onclick="selectAnswer(4, 'A')">A. 直接表達不滿</button>
-            <button onclick="selectAnswer(4, 'B')">B. 默默不語</button>
-            <button onclick="selectAnswer(4, 'C')">C. 開始調皮地轉移注意力</button>
-            <button onclick="selectAnswer(4, 'D')">D. 試著冷靜後再溝通</button>
-        </div>
-
-        <!-- 問題 5 -->
-        <div class="question" id="q5" style="display:none;">
-            <h4>5. 你認為愛情的核心是什麼？</h4>
-            <button onclick="selectAnswer(5, 'A')">A. 信任</button>
-            <button onclick="selectAnswer(5, 'B')">B. 共享生活</button>
-            <button onclick="selectAnswer(5, 'C')">C. 浪漫與驚喜</button>
-            <button onclick="selectAnswer(5, 'D')">D. 相互理解與包容</button>
-        </div>
-
-        <!-- 問題 6 -->
-        <div class="question" id="q6" style="display:none;">
-            <h4>6. 在愛情中，你最看重哪一點？</h4>
-            <button onclick="selectAnswer(6, 'A')">A. 彼此的事業與目標</button>
-            <button onclick="selectAnswer(6, 'B')">B. 共度的每一個細節</button>
-            <button onclick="selectAnswer(6, 'C')">C. 激發對方的創造力</button>
-            <button onclick="selectAnswer(6, 'D')">D. 舒適的相處氛圍</button>
-        </div>
-
-        <!-- 問題 7 -->
-        <div class="question" id="q7" style="display:none;">
-            <h4>7. 當你遇到困難時，你更願意如何得到支持？</h4>
-            <button onclick="selectAnswer(7, 'A')">A. 強而有力的建議</button>
-            <button onclick="selectAnswer(7, 'B')">B. 一個溫暖的擁抱</button>
-            <button onclick="selectAnswer(7, 'C')">C. 搞笑的安慰</button>
-            <button onclick="selectAnswer(7, 'D')">D. 靜靜陪伴在身邊</button>
-        </div>
-
-        <!-- 問題 8 -->
-        <div class="question" id="q8" style="display:none;">
-            <h4>8. 你和對方的日常相處，你喜歡的方式是？</h4>
-            <button onclick="selectAnswer(8, 'A')">A. 一起討論問題</button>
-            <button onclick="selectAnswer(8, 'B')">B. 一起享受安靜的時光</button>
-            <button onclick="selectAnswer(8, 'C')">C. 總是有些驚喜的互動</button>
-            <button onclick="selectAnswer(8, 'D')">D. 共同創造家庭氛圍</button>
-        </div>
-
-        <!-- 問題 9 -->
-        <div class="question" id="q9" style="display:none;">
-            <h4>9. 愛情中的你更喜歡什麼樣的角色？</h4>
-            <button onclick="selectAnswer(9, 'A')">A. 領導者，帶著對方一起走向未來</button>
-            <button onclick="selectAnswer(9, 'B')">B. 照顧者，讓對方感到溫暖</button>
-            <button onclick="selectAnswer(9, 'C')">C. 活躍者，讓愛情永遠充滿趣味</button>
-            <button onclick="selectAnswer(9, 'D')">D. 穩定者，為對方提供依靠</button>
-        </div>
-
-        <!-- 問題 10 -->
-        <div class="question" id="q10" style="display:none;">
-            <h4>10. 你最喜歡和對方共享什麼時光？</h4>
-            <button onclick="selectAnswer(10, 'A')">A. 旅行和冒險</button>
-            <button onclick="selectAnswer(10, 'B')">B. 輕鬆的日常生活</button>
-            <button onclick="selectAnswer(10, 'C')">C. 浪漫的約會和慶祝</button>
-            <button onclick="selectAnswer(10, 'D')">D. 和對方一起規劃未來</button>
-        </div>
+        <!-- 其他問題會在選擇後顯示 -->
 
         <div id="result"></div>
         <div id="actions" style="display:none;">
@@ -293,25 +215,41 @@
                 }
             }
 
-            finalResult = '你最適合的戀愛代表人物是：' + (resultKey === 'A' ? '領導型' : resultKey === 'B' ? '照顧型' : resultKey === 'C' ? '活躍型' : '穩定型') + '。';
+            // 根據結果顯示對應的文本
+            switch (resultKey) {
+                case 'A':
+                    finalResult = "你是領導型的戀愛代表！";
+                    break;
+                case 'B':
+                    finalResult = "你是溫柔體貼型的戀愛代表！";
+                    break;
+                case 'C':
+                    finalResult = "你是浪漫搞笑型的戀愛代表！";
+                    break;
+                case 'D':
+                    finalResult = "你是穩重依賴型的戀愛代表！";
+                    break;
+            }
+
             document.getElementById('result').innerText = finalResult;
             document.getElementById('actions').style.display = 'block';
         }
 
         function copyResult() {
-            navigator.clipboard.writeText(finalResult);
-            alert('結果已經複製到剪貼簿！');
+            navigator.clipboard.writeText(finalResult).then(() => {
+                alert('結果已複製到剪貼板！');
+            });
         }
 
         function resetQuiz() {
             answers = [];
             finalResult = '';
-            document.getElementById('q1').style.display = 'block';
-            for (let i = 2; i <= 10; i++) {
-                document.getElementById('q' + i).style.display = 'none';
-            }
             document.getElementById('result').innerText = '';
             document.getElementById('actions').style.display = 'none';
+
+            for (let i = 1; i <= 10; i++) {
+                document.getElementById('q' + i).style.display = i === 1 ? 'block' : 'none';
+            }
         }
     </script>
 </body>
