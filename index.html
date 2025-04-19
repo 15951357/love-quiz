@@ -2,6 +2,7 @@
 <html lang="zh">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>戀愛代表人物測驗</title>
     <style>
         body {
@@ -19,17 +20,18 @@
         }
 
         .container {
-            background-color: rgba(0, 0, 0, 0.6); /* 透明黑色背景，讓文字更突出 */
-            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.7); /* 透明黑色背景，讓文字更突出 */
+            padding: 50px;
             border-radius: 15px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             text-align: center;
+            overflow: hidden;
         }
 
         h2 {
-            font-size: 36px;
+            font-size: 48px;
             margin-bottom: 20px;
             font-family: 'Georgia', serif;
             color: #A7C7E7;
@@ -37,28 +39,28 @@
         }
 
         p.intro {
-            font-size: 18px;
+            font-size: 22px;
             margin-bottom: 40px;
             color: #d1d1d1;
             line-height: 1.6;
         }
 
         .question h4 {
-            font-size: 22px;
+            font-size: 28px;
             color: #F39C12;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-bottom: 15px;
         }
 
         .question {
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
 
         button {
             background-color: #6A4C7C; /* 神秘的紫色 */
             color: white;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 20px 40px;
+            font-size: 22px;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -75,23 +77,23 @@
         #result {
             font-weight: bold;
             color: #F39C12;
-            margin-top: 20px;
-            font-size: 20px;
+            margin-top: 30px;
+            font-size: 24px;
             text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
 
         #actions {
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         #actions button {
             background-color: #9B59B6;
-            padding: 10px 20px;
+            padding: 15px 30px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 20px;
             border: none;
             cursor: pointer;
-            margin: 5px;
+            margin: 10px;
             transition: 0.3s;
         }
 
@@ -108,6 +110,59 @@
             0% { opacity: 0; transform: translateY(-50px); }
             100% { opacity: 1; transform: translateY(0); }
         }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .question h4 {
+                font-size: 24px;
+            }
+
+            button {
+                font-size: 20px;
+                padding: 15px 30px;
+            }
+
+            #result {
+                font-size: 22px;
+            }
+
+            #actions button {
+                font-size: 18px;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 30px;
+            }
+
+            .question h4 {
+                font-size: 20px;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 12px 25px;
+            }
+
+            #result {
+                font-size: 20px;
+            }
+
+            #actions button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -117,7 +172,7 @@
         <p class="intro">這是一個輕鬆有趣的戀愛測驗，幫助你發現自己在戀愛中最具代表性的角色。每個問題的答案會對應到你戀愛風格的不同面向，讓我們一起來探索吧！</p>
 
         <div class="question" id="q1">
-            <h4>1. 你最喜歡的約會方式是？</h4>
+            <h4>1. 當你和對方約會時，總會有那麼一刻，心跳加速。你最喜歡的約會方式是？</h4>
             <button onclick="selectAnswer(1, 'A')">A. 一起去看電影</button>
             <button onclick="selectAnswer(1, 'B')">B. 隨便走走</button>
             <button onclick="selectAnswer(1, 'C')">C. 有趣的驚喜</button>
@@ -125,7 +180,7 @@
         </div>
 
         <div class="question" id="q2" style="display:none;">
-            <h4>2. 你喜歡哪種戀愛風格？</h4>
+            <h4>2. 在愛情中，有時候是一場小小的爭執，也能讓彼此的心更加靠近。你喜歡哪種戀愛風格呢？</h4>
             <button onclick="selectAnswer(2, 'A')">A. 強勢又有主見</button>
             <button onclick="selectAnswer(2, 'B')">B. 貼心又細心</button>
             <button onclick="selectAnswer(2, 'C')">C. 浪漫又搞笑</button>
@@ -133,7 +188,7 @@
         </div>
 
         <div class="question" id="q3" style="display:none;">
-            <h4>3. 愛情對你來說是？</h4>
+            <h4>3. 你和對方的愛情是怎樣的？是像童話般的浪漫，還是現實中的平凡卻又充滿溫暖？</h4>
             <button onclick="selectAnswer(3, 'A')">A. 共同前進</button>
             <button onclick="selectAnswer(3, 'B')">B. 相互照顧</button>
             <button onclick="selectAnswer(3, 'C')">C. 浪漫童話</button>
@@ -207,3 +262,4 @@
     </script>
 </body>
 </html>
+
