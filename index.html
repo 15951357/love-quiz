@@ -8,20 +8,21 @@
             font-family: 'Arial', sans-serif;
             padding: 30px;
             margin: 0;
-            background: url('https://images.unsplash.com/photo-1511282681501-d09f16083631?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGxpZ2h0fGVufDB8fHx8fDE2Njc5NzAxODk&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
-            background-size: cover; /* 背景圖片覆蓋整個螢幕 */
+            background: url('https://images.unsplash.com/photo-1533030598353-c709f43a7b8e?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGZvcmVzdHxlbnwwfHx8fDE2Njc5NzAxODk&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+            background-size: cover;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             color: #fff;
+            box-sizing: border-box;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.85);
+            background-color: rgba(0, 0, 0, 0.6); /* 透明黑色背景，讓文字更突出 */
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
             width: 100%;
             max-width: 600px;
             text-align: center;
@@ -31,14 +32,22 @@
             font-size: 36px;
             margin-bottom: 20px;
             font-family: 'Georgia', serif;
-            color: #6D2F5C;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #A7C7E7;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
 
         p.intro {
             font-size: 18px;
             margin-bottom: 40px;
-            color: #333;
+            color: #d1d1d1;
+            line-height: 1.6;
+        }
+
+        .question h4 {
+            font-size: 22px;
+            color: #F39C12;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 15px;
         }
 
         .question {
@@ -46,7 +55,7 @@
         }
 
         button {
-            background-color: #8E44AD;
+            background-color: #6A4C7C; /* 神秘的紫色 */
             color: white;
             padding: 15px 30px;
             font-size: 18px;
@@ -59,16 +68,16 @@
         }
 
         button:hover {
-            background-color: #9B59B6;
+            background-color: #8E7A8D;
             transform: scale(1.05);
         }
 
         #result {
             font-weight: bold;
-            color: #D35400;
+            color: #F39C12;
             margin-top: 20px;
             font-size: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
 
         #actions {
@@ -76,7 +85,7 @@
         }
 
         #actions button {
-            background-color: #F39C12;
+            background-color: #9B59B6;
             padding: 10px 20px;
             border-radius: 8px;
             font-size: 16px;
@@ -87,7 +96,7 @@
         }
 
         #actions button:hover {
-            background-color: #F1C40F;
+            background-color: #8E44AD;
         }
 
         /* 問題進入動畫 */
@@ -129,15 +138,6 @@
             <button onclick="selectAnswer(3, 'B')">B. 相互照顧</button>
             <button onclick="selectAnswer(3, 'C')">C. 浪漫童話</button>
             <button onclick="selectAnswer(3, 'D')">D. 安定生活</button>
-        </div>
-
-        <!-- 更多問題 -->
-        <div class="question" id="q4" style="display:none;">
-            <h4>4. 如果你和伴侶有爭執，通常會怎麼做？</h4>
-            <button onclick="selectAnswer(4, 'A')">A. 激烈爭論直到解決</button>
-            <button onclick="selectAnswer(4, 'B')">B. 平靜地溝通，讓對方理解我</button>
-            <button onclick="selectAnswer(4, 'C')">C. 避開爭執，讓氣氛輕鬆</button>
-            <button onclick="selectAnswer(4, 'D')">D. 試圖妥協以達成和解</button>
         </div>
 
         <div id="result"></div>
@@ -200,13 +200,10 @@
             document.getElementById('result').innerText = '';
             document.getElementById('actions').style.display = 'none';
 
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 3; i++) {
                 document.getElementById('q' + i).style.display = (i === 1) ? 'block' : 'none';
             }
         }
     </script>
 </body>
 </html>
-
-
-
