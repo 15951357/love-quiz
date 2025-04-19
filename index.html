@@ -3,94 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>戀愛探險測驗</title>
+    <title>戀愛代表人物測驗</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            padding: 20px;
-            background: url('https://cdn.pixabay.com/photo/2017/08/30/20/06/fantasy-2699963_960_720.jpg') no-repeat center center fixed;
+            padding: 30px;
+            margin: 0;
+            background: url('https://images.unsplash.com/photo-1533030598353-c709f43a7b8e?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGZvcmVzdHxlbnwwfHx8fDE2Njc5NzAxODk&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
             background-size: cover;
-            color: white;
-            transition: background 1s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+            box-sizing: border-box;
         }
-        .question {
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 50px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h2 {
+            font-size: 48px;
             margin-bottom: 20px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 20px;
-            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            color: #A7C7E7;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
+
+        p.intro {
+            font-size: 22px;
+            margin-bottom: 40px;
+            color: #d1d1d1;
+            line-height: 1.6;
+        }
+
+        .question h4 {
+            font-size: 28px;
+            color: #F39C12;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+        }
+
         button {
-            background: #f57c00;
-            border: none;
-            padding: 10px;
-            margin: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
+            background-color: #6A4C7C;
             color: white;
+            padding: 20px 40px;
+            font-size: 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            margin: 10px 0;
+            width: 100%;
         }
+
         button:hover {
-            background: #ff9800;
+            background-color: #8E7A8D;
+            transform: scale(1.05);
         }
+
         #result {
             font-weight: bold;
-            color: lightgoldenrodyellow;
+            color: #F39C12;
+            margin-top: 30px;
+            font-size: 24px;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #actions {
             margin-top: 30px;
         }
-        #actions {
-            margin-top: 20px;
+
+        #actions button {
+            background-color: #9B59B6;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s;
         }
-        .hidden {
-            display: none;
+
+        #actions button:hover {
+            background-color: #8E44AD;
+        }
+
+        .question {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+            }
+
+            h2 {
+                font-size: 36px;
+            }
+
+            .question h4 {
+                font-size: 24px;
+            }
+
+            button {
+                font-size: 20px;
+                padding: 15px 30px;
+            }
+
+            #result {
+                font-size: 22px;
+            }
+
+            #actions button {
+                font-size: 18px;
+                padding: 12px 25px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h2 {
+                font-size: 30px;
+            }
+
+            .question h4 {
+                font-size: 20px;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 12px 25px;
+            }
+
+            #result {
+                font-size: 20px;
+            }
+
+            #actions button {
+                font-size: 16px;
+                padding: 10px 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <h2>戀愛代表人物測驗 💘</h2>
 
-    <h2>戀愛探險測驗 💖</h2>
+        <p class="intro">這是一個輕鬆有趣的戀愛測驗，幫助你發現自己在戀愛中最具代表性的角色。每個問題的答案會對應到你戀愛風格的不同面向，讓我們一起來探索吧！</p>
 
-    <div class="question" id="q1">
-        <h4>1. 你和心儀的人在星空下散步，月光灑在你們的身上。突然，他/她停下來，對你微笑。你會怎麼做？</h4>
-        <button onclick="selectAnswer(1, 'A')">A. 牽起他的手，感受這份美好的浪漫。</button>
-        <button onclick="selectAnswer(1, 'B')">B. 順其自然，輕輕對他微笑，享受這片刻的寧靜。</button>
-        <button onclick="selectAnswer(1, 'C')">C. 尋找話題，開心的聊天，讓這個時刻更加輕鬆愉快。</button>
-        <button onclick="selectAnswer(1, 'D')">D. 低下頭，害羞的笑了笑，不知道該怎麼做。</button>
-    </div>
+        <!-- 問題 1 -->
+        <div class="question" id="q1">
+            <h4>1. 當你和對方約會時，總會有那麼一刻，心跳加速。你最喜歡的約會方式是？</h4>
+            <button onclick="selectAnswer(1, 'A')">A. 一起去看電影</button>
+            <button onclick="selectAnswer(1, 'B')">B. 隨便走走</button>
+            <button onclick="selectAnswer(1, 'C')">C. 有趣的驚喜</button>
+            <button onclick="selectAnswer(1, 'D')">D. 一起煮飯</button>
+        </div>
 
-    <div class="question hidden" id="q2">
-        <h4>2. 你們兩個一起走進了一個充滿鮮花的小道，周圍有著淡淡的花香。他/她突然停下來，將一朵花送給你。你會：</h4>
-        <button onclick="selectAnswer(2, 'A')">A. 接過花，輕輕地擁抱他/她，感謝這份心意。</button>
-        <button onclick="selectAnswer(2, 'B')">B. 謝謝他/她，並開心地把花放在耳邊。</button>
-        <button onclick="selectAnswer(2, 'C')">C. 想要送他/她一朵回禮，感謝他/她的溫暖。</button>
-        <button onclick="selectAnswer(2, 'D')">D. 害羞的微笑，心裡卻感到暖暖的。</button>
-    </div>
+        <!-- 問題 2 -->
+        <div class="question" id="q2" style="display:none;">
+            <h4>2. 在愛情中，有時候是一場小小的爭執，也能讓彼此的心更加靠近。你喜歡哪種戀愛風格呢？</h4>
+            <button onclick="selectAnswer(2, 'A')">A. 強勢又有主見</button>
+            <button onclick="selectAnswer(2, 'B')">B. 貼心又細心</button>
+            <button onclick="selectAnswer(2, 'C')">C. 浪漫又搞笑</button>
+            <button onclick="selectAnswer(2, 'D')">D. 穩重又溫暖</button>
+        </div>
 
-    <div class="question hidden" id="q3">
-        <h4>3. 你們一起走到一片安靜的湖泊旁，夕陽正在下沉。你會怎麼做？</h4>
-        <button onclick="selectAnswer(3, 'A')">A. 坐下來靜靜地享受這美麗的時光，並告訴他/她你對未來的期待。</button>
-        <button onclick="selectAnswer(3, 'B')">B. 拿出相機，記錄這美好的一刻。</button>
-        <button onclick="selectAnswer(3, 'C')">C. 輕聲和他/她談談心，分享你心底的想法。</button>
-        <button onclick="selectAnswer(3, 'D')">D. 靜靜地坐著，並深呼吸，享受那份寧靜。</button>
-    </div>
+        <!-- 問題 3 -->
+        <div class="question" id="q3" style="display:none;">
+            <h4>3. 你和對方的愛情是怎樣的？是像童話般的浪漫，還是現實中的平凡卻又充滿溫暖？</h4>
+            <button onclick="selectAnswer(3, 'A')">A. 共同前進</button>
+            <button onclick="selectAnswer(3, 'B')">B. 相互照顧</button>
+            <button onclick="selectAnswer(3, 'C')">C. 浪漫童話</button>
+            <button onclick="selectAnswer(3, 'D')">D. 安定生活</button>
+        </div>
 
-    <div id="result"></div>
-    <div id="actions" class="hidden">
-        <button onclick="copyResult()">📋 複製分享文字</button>
-        <button onclick="resetQuiz()">🔁 重新測驗</button>
+        <!-- 問題 4 -->
+        <div class="question" id="q4" style="display:none;">
+            <h4>4. 當你和對方有一些不愉快時，你會怎麼處理？</h4>
+            <button onclick="selectAnswer(4, 'A')">A. 直接表達不滿</button>
+            <button onclick="selectAnswer(4, 'B')">B. 默默不語</button>
+            <button onclick="selectAnswer(4, 'C')">C. 開始調皮地轉移注意力</button>
+            <button onclick="selectAnswer(4, 'D')">D. 試著冷靜後再溝通</button>
+        </div>
+
+        <!-- 問題 5 -->
+        <div class="question" id="q5" style="display:none;">
+            <h4>5. 你認為愛情的核心是什麼？</h4>
+            <button onclick="selectAnswer(5, 'A')">A. 信任</button>
+            <button onclick="selectAnswer(5, 'B')">B. 共享生活</button>
+            <button onclick="selectAnswer(5, 'C')">C. 浪漫與驚喜</button>
+            <button onclick="selectAnswer(5, 'D')">D. 相互理解與包容</button>
+        </div>
+
+        <!-- 問題 6 -->
+        <div class="question" id="q6" style="display:none;">
+            <h4>6. 在愛情中，你最看重哪一點？</h4>
+            <button onclick="selectAnswer(6, 'A')">A. 彼此的事業與目標</button>
+            <button onclick="selectAnswer(6, 'B')">B. 共度的每一個細節</button>
+            <button onclick="selectAnswer(6, 'C')">C. 激發對方的創造力</button>
+            <button onclick="selectAnswer(6, 'D')">D. 舒適的相處氛圍</button>
+        </div>
+
+        <!-- 問題 7 -->
+        <div class="question" id="q7" style="display:none;">
+            <h4>7. 當你遇到困難時，你更願意如何得到支持？</h4>
+            <button onclick="selectAnswer(7, 'A')">A. 強而有力的建議</button>
+            <button onclick="selectAnswer(7, 'B')">B. 一個溫暖的擁抱</button>
+            <button onclick="selectAnswer(7, 'C')">C. 搞笑的安慰</button>
+            <button onclick="selectAnswer(7, 'D')">D. 靜靜陪伴在身邊</button>
+        </div>
+
+        <!-- 問題 8 -->
+        <div class="question" id="q8" style="display:none;">
+            <h4>8. 你和對方的日常相處，你喜歡的方式是？</h4>
+            <button onclick="selectAnswer(8, 'A')">A. 一起討論問題</button>
+            <button onclick="selectAnswer(8, 'B')">B. 一起享受安靜的時光</button>
+            <button onclick="selectAnswer(8, 'C')">C. 總是有些驚喜的互動</button>
+            <button onclick="selectAnswer(8, 'D')">D. 共同創造家庭氛圍</button>
+        </div>
+
+        <!-- 問題 9 -->
+        <div class="question" id="q9" style="display:none;">
+            <h4>9. 愛情中的你更喜歡什麼樣的角色？</h4>
+            <button onclick="selectAnswer(9, 'A')">A. 領導者，帶著對方一起走向未來</button>
+            <button onclick="selectAnswer(9, 'B')">B. 照顧者，讓對方感到溫暖</button>
+            <button onclick="selectAnswer(9, 'C')">C. 活躍者，讓愛情永遠充滿趣味</button>
+            <button onclick="selectAnswer(9, 'D')">D. 穩定者，為對方提供依靠</button>
+        </div>
+
+        <!-- 問題 10 -->
+        <div class="question" id="q10" style="display:none;">
+            <h4>10. 你最喜歡和對方共享什麼時光？</h4>
+            <button onclick="selectAnswer(10, 'A')">A. 旅行和冒險</button>
+            <button onclick="selectAnswer(10, 'B')">B. 輕鬆的日常生活</button>
+            <button onclick="selectAnswer(10, 'C')">C. 浪漫的約會和慶祝</button>
+            <button onclick="selectAnswer(10, 'D')">D. 和對方一起規劃未來</button>
+        </div>
+
+        <div id="result"></div>
+        <div id="actions" style="display:none;">
+            <button onclick="copyResult()">📋 複製分享文字</button>
+            <button onclick="resetQuiz()">🔁 重新測驗</button>
+        </div>
     </div>
 
     <script>
         let answers = [];
         let finalResult = '';
 
-        // 顯示下一題
         function selectAnswer(qNum, choice) {
             answers[qNum - 1] = choice;
-            document.getElementById('q' + qNum).classList.add('hidden');
+            document.getElementById('q' + qNum).style.display = 'none';
 
-            // 確保下一題顯示
-            if (qNum < 3) {
-                document.getElementById('q' + (qNum + 1)).classList.remove('hidden');
+            if (qNum < 10) {
+                document.getElementById('q' + (qNum + 1)).style.display = 'block';
             } else {
                 showResult();
             }
@@ -104,41 +289,5 @@
 
             for (let key in count) {
                 if (count[key] > max) {
-                    max = count[key];
-                    resultKey = key;
-                }
-            }
+                    max = count
 
-            const results = {
-                A: '你是浪漫的冒險家，總是渴望與心愛的人一起探索未來。',
-                B: '你是溫柔的守護者，對愛情充滿耐心與細心。',
-                C: '你是浪漫的夢想家，喜歡夢幻的世界與愛情故事。',
-                D: '你是穩重的戀人，對愛情充滿責任感和穩定性。'
-            };
-
-            finalResult = results[resultKey];
-            document.getElementById('result').innerText = "你的戀愛代表人物是：" + finalResult;
-            document.getElementById('actions').classList.remove('hidden');
-        }
-
-        function copyResult() {
-            const text = "我在戀愛探險測驗中的結果是：" + finalResult + "，快來測試看看！";
-            navigator.clipboard.writeText(text).then(() => {
-                alert("已複製分享文字！");
-            });
-        }
-
-        function resetQuiz() {
-            answers = [];
-            finalResult = '';
-            document.getElementById('result').innerText = '';
-            document.getElementById('actions').classList.add('hidden');
-
-            for (let i = 1; i <= 3; i++) {
-                document.getElementById('q' + i).classList.add('hidden');
-            }
-            document.getElementById('q1').classList.remove('hidden');
-        }
-    </script>
-</body>
-</html>
