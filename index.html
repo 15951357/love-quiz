@@ -8,20 +8,20 @@
             font-family: 'Arial', sans-serif;
             padding: 30px;
             margin: 0;
-            background: linear-gradient(to right, #f5a623, #ff5e57); /* 漸變背景 */
+            background: url('https://images.unsplash.com/photo-1511282681501-d09f16083631?crop=entropy&cs=tinysrgb&fit=max&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGxpZ2h0fGVufDB8fHx8fDE2Njc5NzAxODk&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center fixed;
+            background-size: cover; /* 背景圖片覆蓋整個螢幕 */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-size: cover;
-            color: white;
+            color: #fff;
         }
 
         .container {
-            background-color: rgba(255, 255, 255, 0.9); /* 白色透明背景 */
+            background-color: rgba(255, 255, 255, 0.85);
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 600px;
             text-align: center;
@@ -31,8 +31,14 @@
             font-size: 36px;
             margin-bottom: 20px;
             font-family: 'Georgia', serif;
-            color: #5e2b8d; /* 標題顏色 */
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            color: #6D2F5C;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        p.intro {
+            font-size: 18px;
+            margin-bottom: 40px;
+            color: #333;
         }
 
         .question {
@@ -40,7 +46,7 @@
         }
 
         button {
-            background-color: #6a1b9a; /* 按鈕顏色 */
+            background-color: #8E44AD;
             color: white;
             padding: 15px 30px;
             font-size: 18px;
@@ -53,16 +59,16 @@
         }
 
         button:hover {
-            background-color: #9c4dcc; /* 按鈕懸停顏色 */
-            transform: scale(1.05); /* 放大效果 */
+            background-color: #9B59B6;
+            transform: scale(1.05);
         }
 
         #result {
             font-weight: bold;
-            color: darkred;
+            color: #D35400;
             margin-top: 20px;
             font-size: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
         }
 
         #actions {
@@ -70,7 +76,7 @@
         }
 
         #actions button {
-            background-color: #ff5e57;
+            background-color: #F39C12;
             padding: 10px 20px;
             border-radius: 8px;
             font-size: 16px;
@@ -81,10 +87,10 @@
         }
 
         #actions button:hover {
-            background-color: #f97376;
+            background-color: #F1C40F;
         }
 
-        /* 頁面進入動畫 */
+        /* 問題進入動畫 */
         .question {
             animation: fadeIn 1s ease-out;
         }
@@ -93,14 +99,13 @@
             0% { opacity: 0; transform: translateY(-50px); }
             100% { opacity: 1; transform: translateY(0); }
         }
-
-        /* 音效 (選擇性) */
-        /* 可以選擇為按鈕加入音效或其他視覺效果 */
     </style>
 </head>
 <body>
     <div class="container">
         <h2>戀愛代表人物測驗 💘</h2>
+
+        <p class="intro">這是一個輕鬆有趣的戀愛測驗，幫助你發現自己在戀愛中最具代表性的角色。每個問題的答案會對應到你戀愛風格的不同面向，讓我們一起來探索吧！</p>
 
         <div class="question" id="q1">
             <h4>1. 你最喜歡的約會方式是？</h4>
@@ -126,6 +131,15 @@
             <button onclick="selectAnswer(3, 'D')">D. 安定生活</button>
         </div>
 
+        <!-- 更多問題 -->
+        <div class="question" id="q4" style="display:none;">
+            <h4>4. 如果你和伴侶有爭執，通常會怎麼做？</h4>
+            <button onclick="selectAnswer(4, 'A')">A. 激烈爭論直到解決</button>
+            <button onclick="selectAnswer(4, 'B')">B. 平靜地溝通，讓對方理解我</button>
+            <button onclick="selectAnswer(4, 'C')">C. 避開爭執，讓氣氛輕鬆</button>
+            <button onclick="selectAnswer(4, 'D')">D. 試圖妥協以達成和解</button>
+        </div>
+
         <div id="result"></div>
         <div id="actions" style="display:none;">
             <button onclick="copyResult()">📋 複製分享文字</button>
@@ -141,7 +155,7 @@
             answers[qNum - 1] = choice;
             document.getElementById('q' + qNum).style.display = 'none';
 
-            if (qNum < 3) {
+            if (qNum < 4) {
                 document.getElementById('q' + (qNum + 1)).style.display = 'block';
             } else {
                 showResult();
@@ -186,12 +200,13 @@
             document.getElementById('result').innerText = '';
             document.getElementById('actions').style.display = 'none';
 
-            for (let i = 1; i <= 3; i++) {
+            for (let i = 1; i <= 4; i++) {
                 document.getElementById('q' + i).style.display = (i === 1) ? 'block' : 'none';
             }
         }
     </script>
 </body>
 </html>
+
 
 
