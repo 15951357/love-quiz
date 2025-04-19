@@ -4,15 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>戀愛代表人物測驗</title>
-    <!-- 引入可愛的字體 -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Lobster&family=Pacifico&family=Baloo&display=swap" rel="stylesheet">
-
     <style>
         body {
-            font-family: 'Poppins', sans-serif; /* 可愛字體 */
+            font-family: 'Arial', sans-serif;
             padding: 30px;
             margin: 0;
-            background-color: #FAD0C4; /* 粉色背景 */
+            background-color: #FFC0CB; /* 設置粉色背景 */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -35,7 +32,7 @@
         h2 {
             font-size: 48px;
             margin-bottom: 20px;
-            font-family: 'Lobster', cursive; /* 可愛字體 */
+            font-family: 'Georgia', serif;
             color: #A7C7E7;
             text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
@@ -69,7 +66,6 @@
             transition: all 0.3s ease-in-out;
             margin: 10px 0;
             width: 100%;
-            font-family: 'Pacifico', cursive; /* 可愛字體 */
         }
 
         button:hover {
@@ -98,7 +94,6 @@
             cursor: pointer;
             margin: 10px;
             transition: 0.3s;
-            font-family: 'Baloo', cursive; /* 可愛字體 */
         }
 
         #actions button:hover {
@@ -298,45 +293,26 @@
                 }
             }
 
-            finalResult = getResultText(resultKey);
-            document.getElementById('result').textContent = finalResult;
+            finalResult = '你最適合的戀愛代表人物是：' + (resultKey === 'A' ? '領導型' : resultKey === 'B' ? '照顧型' : resultKey === 'C' ? '活躍型' : '穩定型') + '。';
+            document.getElementById('result').innerText = finalResult;
             document.getElementById('actions').style.display = 'block';
         }
 
-        function getResultText(resultKey) {
-            switch (resultKey) {
-                case 'A':
-                    return "你是領導型人物！你總是充滿自信，帶著對方一起走向未來。";
-                case 'B':
-                    return "你是照顧型人物！你總是細心照顧對方，讓對方感到溫暖。";
-                case 'C':
-                    return "你是活躍型人物！你讓愛情充滿樂趣與驚喜，總是充滿活力。";
-                case 'D':
-                    return "你是穩定型人物！你提供對方穩定的依靠，帶來安全感。";
-                default:
-                    return "請稍後再試。";
-            }
-        }
-
         function copyResult() {
-            const resultText = finalResult;
-            navigator.clipboard.writeText(resultText).then(function() {
-                alert('結果已複製！你可以分享給朋友了。');
-            });
+            navigator.clipboard.writeText(finalResult);
+            alert('結果已經複製到剪貼簿！');
         }
 
         function resetQuiz() {
             answers = [];
             finalResult = '';
-            for (let i = 1; i <= 10; i++) {
+            document.getElementById('q1').style.display = 'block';
+            for (let i = 2; i <= 10; i++) {
                 document.getElementById('q' + i).style.display = 'none';
             }
-            document.getElementById('q1').style.display = 'block';
-            document.getElementById('result').textContent = '';
+            document.getElementById('result').innerText = '';
             document.getElementById('actions').style.display = 'none';
         }
     </script>
 </body>
 </html>
-
-
