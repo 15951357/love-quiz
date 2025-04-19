@@ -13,7 +13,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      min-height: 100vh;
       color: #333;
     }
 
@@ -25,6 +25,12 @@
       max-width: 800px;
       width: 90%;
       text-align: center;
+      animation: fadeIn 1.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h2 {
@@ -33,8 +39,8 @@
     }
 
     .question {
-      display: none;
       margin-bottom: 30px;
+      animation: fadeIn 0.6s ease;
     }
 
     .question h4 {
@@ -55,26 +61,80 @@
       width: 80%;
       cursor: pointer;
       transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     button:hover {
       transform: scale(1.05);
       background-color: #f39ab9;
+      box-shadow: 0 0 10px #ffd6e8;
     }
 
+    #progressBar {
+      height: 10px;
+      background-color: #ffdbe9;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 20px 0;
+    }
+
+    #progress {
+      height: 100%;
+      width: 0;
+      background-color: #ff88a2;
+      transition: width 0.5s ease;
+    }
+
+    #resultCard {
+      display: none;
+      background: #fff;
+      color: #333;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      border: 2px solid #ffe0f0;
+      margin-top: 20px;
+      animation: fadeIn 1.2s ease;
+    }
+
+    .result-title {
+      font-size: 24px;
+      font-weight: bold;
+      color: #d15e8b;
+      margin-bottom: 10px;
+    }
+
+    .result-desc {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .quote {
+      font-size: 16px;
+      font-style: italic;
+      color: #666;
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2>愛就是love more 愛不就是樂芙沫 💘</h2>
+    <h2>戀愛代表人物測驗 💘</h2>
     <div id="intro">
       <p>透過這些問題，找出你最像哪位《排球少年》的戀愛代表人物！</p>
       <button onclick="startQuiz()">開始測驗</button>
     </div>
 
-    <!-- 問題會用 JS 動態顯示 -->
+    <div id="progressBar"><div id="progress"></div></div>
+
     <div id="questionContainer"></div>
 
+    <div id="resultCard">
+      <div class="result-title" id="resultTitle"></div>
+      <div class="result-desc" id="resultDesc"></div>
+      <div class="quote" id="resultQuote"></div>
+      <button onclick="resetQuiz()">重新測驗</button>
+    </div>
   </div>
 
   <script>
@@ -90,6 +150,29 @@
       ["當你看到對方有不開心的時候，你會怎麼做？", ["安慰並鼓勵對方", "開玩笑逗對方開心", "給對方空間，等對方自己好起來", "耐心聆聽，了解對方的困難"]],
       ["當戀愛關係不如預期時，你會選擇？", ["直接坦白，讓問題得到解決", "耐心等待，讓情感自然流動", "調整心態，保持樂觀", "選擇暫時冷靜，重新審視關係"]]
     ];
+
+    const results = {
+      A: {
+        name: "日向翔陽",
+        desc: "你像日向翔陽，總是充滿活力，積極主動。在戀愛中，你是那個會不顧一切去爭取自己愛的人！",
+        quote: "「即使再小的努力，也要堅持下去！」"
+      },
+      B: {
+        name: "影山飛雄",
+        desc: "你像影山飛雄，雖然有些內向和高冷，但實際上很重視關係的深度。",
+        quote: "「我不是不想，我只是不知道怎麼做。」"
+      },
+      C: {
+        name: "孤爪研磨",
+        desc: "你像研磨，細膩敏感，總是觀察入微。在戀愛中你會默默守護對方。",
+        quote: "「我不是不喜歡人，只是不太習慣接觸。」"
+      },
+      D: {
+        name: "黑尾鐵朗",
+        desc: "你像黑尾，自信又可靠，是戀愛中的大哥哥角色。你能帶給對方安穩又開心的氛圍。",
+        quote: "「保持步調一致，就能打出漂亮的節奏。」"
+      }
+    };
 
     let current = 0;
     let answers = [];
@@ -109,21 +192,53 @@
       qDiv.innerHTML = `<h4>${current + 1}. ${q[0]}</h4>`;
       q[1].forEach((text, index) => {
         const btn = document.createElement("button");
+        const choice = ["A", "B", "C", "D"][index];
         btn.innerText = text;
-        btn.onclick = () => selectAnswer(index);
+        btn.onclick = () => selectAnswer(choice);
         qDiv.appendChild(btn);
       });
       container.appendChild(qDiv);
+      updateProgress();
     }
 
-    function selectAnswer(index) {
-      answers.push(index);
+    function selectAnswer(choice) {
+      answers.push(choice);
       current++;
       if (current < questions.length) {
         showQuestion();
       } else {
-        alert("測驗結束！答案已選擇。");
+        calculateResult();
       }
+    }
+
+    function updateProgress() {
+      const progress = document.getElementById("progress");
+      progress.style.width = `${(current / questions.length) * 100}%`;
+    }
+
+    function calculateResult() {
+      const count = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach(ans => count[ans]++);
+      const final = Object.entries(count).sort((a, b) => b[1] - a[1])[0][0];
+      showResult(final);
+    }
+
+    function showResult(type) {
+      const data = results[type];
+      document.getElementById("questionContainer").style.display = "none";
+      document.getElementById("resultTitle").innerText = data.name;
+      document.getElementById("resultDesc").innerText = data.desc;
+      document.getElementById("resultQuote").innerText = data.quote;
+      document.getElementById("resultCard").style.display = "block";
+    }
+
+    function resetQuiz() {
+      current = 0;
+      answers = [];
+      document.getElementById("resultCard").style.display = "none";
+      document.getElementById("questionContainer").style.display = "block";
+      document.getElementById("intro").style.display = "block";
+      document.getElementById("progress").style.width = "0%";
     }
   </script>
 </body>
