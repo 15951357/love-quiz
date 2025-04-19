@@ -194,12 +194,15 @@
       answers[questionIndex] = choice;
       document.getElementById('q' + (questionIndex + 1)).style.display = 'none';
       
-      // 檢查是否還有下一題
-      if (questionIndex < 9) {
-        showQuestion(questionIndex + 1);
-      } else {
-        calculateResult();
-      }
+      // 加入延遲後顯示下一題
+      setTimeout(() => {
+        // 檢查是否還有下一題
+        if (questionIndex < 9) {
+          showQuestion(questionIndex + 1);
+        } else {
+          calculateResult();
+        }
+      }, 1000); // 延遲 1 秒再顯示下一題
     }
 
     // 計算測驗結果
@@ -278,3 +281,4 @@
   </script>
 </body>
 </html>
+
