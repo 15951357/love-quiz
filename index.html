@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>戀愛代表人物測驗</title>
-    <!-- 引入 Google Fonts 中的 Poppins 字體 -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Poppins', sans-serif; /* 使用 Poppins 字體 */
+            font-family: Arial, sans-serif;
             padding: 30px;
             margin: 0;
             background-color: #FFC0CB; /* 粉色背景 */
@@ -34,7 +32,6 @@
         h2 {
             font-size: 48px;
             margin-bottom: 20px;
-            font-family: 'Poppins', sans-serif;
             color: #A7C7E7;
             text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
         }
@@ -51,7 +48,6 @@
             color: #F39C12;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
             margin-bottom: 15px;
-            font-family: 'Poppins', sans-serif;
         }
 
         .question {
@@ -69,7 +65,6 @@
             transition: all 0.3s ease-in-out;
             margin: 10px 0;
             width: 100%;
-            font-family: 'Poppins', sans-serif;
         }
 
         button:hover {
@@ -98,7 +93,6 @@
             cursor: pointer;
             margin: 10px;
             transition: 0.3s;
-            font-family: 'Poppins', sans-serif;
         }
 
         #actions button:hover {
@@ -172,10 +166,13 @@
         <h2>戀愛代表人物測驗 💘</h2>
 
         <!-- 顯示測驗敘述 -->
-        <p class="intro">這是一個輕鬆有趣的戀愛測驗，幫助你發現自己在戀愛中最具代表性的角色。每個問題的答案會對應到你戀愛風格的不同面向，讓我們一起來探索吧！</p>
+        <p class="intro" id="intro">這是一個輕鬆有趣的戀愛測驗，幫助你發現自己在戀愛中最具代表性的角色。每個問題的答案會對應到你戀愛風格的不同面向，讓我們一起來探索吧！</p>
+
+        <!-- 開始按鈕 -->
+        <button onclick="startQuiz()">開始測驗</button>
 
         <!-- 問題 1 -->
-        <div class="question" id="q1">
+        <div class="question" id="q1" style="display:none;">
             <h4>1. 當你和對方約會時，總會有那麼一刻，心跳加速。你最喜歡的約會方式是？</h4>
             <button onclick="selectAnswer(1, 'A')">A. 一起去看電影</button>
             <button onclick="selectAnswer(1, 'B')">B. 隨便走走</button>
@@ -185,7 +182,7 @@
 
         <!-- 其他問題會在選擇後顯示 -->
 
-        <div id="result"></div>
+        <div id="result" style="display:none;"></div>
         <div id="actions" style="display:none;">
             <button onclick="copyResult()">📋 複製分享文字</button>
             <button onclick="resetQuiz()">🔁 重新測驗</button>
@@ -196,6 +193,15 @@
         let answers = [];
         let finalResult = '';
 
+        // 開始測驗
+        function startQuiz() {
+            // 隱藏敘述文字並顯示第一題
+            document.getElementById('intro').style.display = 'none';
+            document.querySelector('button').style.display = 'none';
+            document.getElementById('q1').style.display = 'block';
+        }
+
+        // 選擇答案
         function selectAnswer(qNum, choice) {
             answers[qNum - 1] = choice;
             document.getElementById('q' + qNum).style.display = 'none';
@@ -207,6 +213,7 @@
             }
         }
 
+        // 顯示結果
         function showResult() {
             const count = { A: 0, B: 0, C: 0, D: 0 };
             answers.forEach(a => count[a]++);
@@ -237,24 +244,33 @@
             }
 
             document.getElementById('result').innerText = finalResult;
+            document.getElementById('result').style.display = 'block';
             document.getElementById('actions').style.display = 'block';
         }
 
+        // 複製結果
         function copyResult() {
             navigator.clipboard.writeText(finalResult).then(() => {
                 alert('結果已複製到剪貼板！');
             });
         }
 
+        // 重新測驗
         function resetQuiz() {
             answers = [];
             finalResult = '';
             document.getElementById('result').innerText = '';
+            document.getElementById('result').style.display = 'none';
             document.getElementById('actions').style.display = 'none';
 
+            // 重設問題
             for (let i = 1; i <= 10; i++) {
                 document.getElementById('q' + i).style.display = i === 1 ? 'block' : 'none';
             }
+
+            // 顯示敘述文字
+            document.getElementById('intro').style.display = 'block';
+            document.querySelector('button').style.display = 'block';
         }
     </script>
 </body>
