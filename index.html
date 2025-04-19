@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>戀愛代表人物測驗</title>
-  <style>
+  <style>   
     body {
       font-family: Arial, sans-serif;
       padding: 30px;
@@ -170,7 +170,6 @@
       <div class="result-title" id="resultTitle"></div>
       <div class="result-desc" id="resultDesc"></div>
       <div class="quote" id="resultQuote"></div>
-      <img id="resultImg" class="result-img" src="" alt="代表人物圖片">
       <button onclick="resetQuiz()">重新測驗</button>
     </div>
   </div>
@@ -241,29 +240,25 @@
           name: "日向翔陽",
           type: "領導型戀愛代表",
           desc: "你像日向翔陽，總是充滿活力，積極主動。在戀愛中，你是那個會不顧一切去爭取自己愛的人！",
-          quote: "「即使再小的努力，也要堅持下去！」",
-          img: "https://via.placeholder.com/200x300.png?text=%E6%97%A5%E5%90%91%E7%BF%94%E9%99%BD"
+          quote: "「即使再小的努力，也要堅持下去！」"
         },
         B: {
           name: "影山飛雄",
           type: "內斂型戀愛代表",
           desc: "你像影山飛雄，雖然有些內向和高冷，但實際上很重視關係的深度。在戀愛中，你不會輕易表現自己，卻會在最需要的時候給予對方支持。",
-          quote: "「我不是不想，我只是不知道怎麼做。」",
-          img: "https://via.placeholder.com/200x300.png?text=%E5%BD%B1%E5%B1%B1%E9%A3%9B%E9%9B%84"
+          quote: "「我不是不想，我只是不知道怎麼做。」"
         },
         C: {
           name: "研磨",
-          type: "理智型戀愛代表",
-          desc: "你像研磨，冷靜、理性，但對愛情卻有深厚的理解。你能夠保持穩定，不輕易浮躁。",
-          quote: "「理智是愛情的基石。」",
-          img: "https://via.placeholder.com/200x300.png?text=%E7%A0%94%E7%A3%A8"
+          type: "搞笑型戀愛代表",
+          desc: "你是快樂製造機，用笑聲與驚喜守護戀情！",
+          quote: "「不管怎樣，我都希望你開心。」"
         },
         D: {
-          name: "黑尾鐵朗",
-          type: "幽默型戀愛代表",
-          desc: "你像黑尾鐵朗，總是充滿幽默感，用笑聲和開朗的性格照亮愛情的每一天。",
-          quote: "「對自己有信心，讓愛情更有趣。」",
-          img: "https://via.placeholder.com/200x300.png?text=%E9%BB%91%E5%B0%BE%E9%90%B5%E6%9C%97"
+          name: "黑尾",
+          type: "穩重型戀愛代表",
+          desc: "你像黑尾，你總是冷靜且理性，能夠在關鍵時刻提供穩定的支持。",
+          quote: "「對的事，隨時都能做。」"
         }
       };
 
@@ -273,7 +268,6 @@
       document.getElementById('resultTitle').innerText = result.name;
       document.getElementById('resultDesc').innerText = result.desc;
       document.getElementById('resultQuote').innerText = result.quote;
-      document.getElementById('resultImg').src = result.img;
 
       document.getElementById('resultCard').style.display = 'block';
     }
