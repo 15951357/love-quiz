@@ -147,12 +147,13 @@
 
     function showQuestion() {
       const container = document.getElementById("questionContainer");
-      container.innerHTML = '';
+      container.innerHTML = '';  // 清空先前的內容
 
       const q = questions[current];
       const qDiv = document.createElement("div");
       qDiv.className = "question";
       qDiv.innerHTML = `<h4>${current + 1}. ${q[0]}</h4>`;
+      
       q[1].forEach((text, index) => {
         const btn = document.createElement("button");
         const choice = ["A", "B", "C", "D"][index];
@@ -160,6 +161,7 @@
         btn.onclick = () => selectAnswer(choice);
         qDiv.appendChild(btn);
       });
+      
       container.appendChild(qDiv);
       container.style.display = "block";  // 顯示問題
       updateProgress();
