@@ -66,35 +66,11 @@
     </div>
 
     <div class="question hidden" id="q3">
-        <h4>3. 你們來到了一片靜謐的湖泊，湖面波光粼粼。你們坐在湖邊，心情愉快。突然，他/她輕聲問：“你對未來有什麼期許？”你會：</h4>
-        <button onclick="selectAnswer(3, 'A')">A. 告訴他/她你對未來的美好願望，並希望一起實現。</button>
-        <button onclick="selectAnswer(3, 'B')">B. 說出你的夢想，並暗暗希望能和他/她一起分享未來。</button>
-        <button onclick="selectAnswer(3, 'C')">C. 開玩笑地說，未來最好是和他/她一起度過。</button>
-        <button onclick="selectAnswer(3, 'D')">D. 沉默不語，感覺這個問題讓你有些不安。</button>
-    </div>
-
-    <div class="question hidden" id="q4">
-        <h4>4. 傍晚時分，你們在公園散步，天邊的夕陽顏色繽紛。他/她突然停下，對你說：“你覺得我們之間的關係如何？”你會：</h4>
-        <button onclick="selectAnswer(4, 'A')">A. 直接告訴他/她，你覺得彼此很合適，期待更多。</button>
-        <button onclick="selectAnswer(4, 'B')">B. 微笑著說，一切都在不言中，默契很足。</button>
-        <button onclick="selectAnswer(4, 'C')">C. 有些害羞，說不出話來，只是輕輕地握住他的手。</button>
-        <button onclick="selectAnswer(4, 'D')">D. 說出自己還需要更多時間來了解彼此。</button>
-    </div>
-
-    <div class="question hidden" id="q5">
-        <h4>5. 你們一起來到了一座小山丘，山丘上有一座小小的木屋，充滿了浪漫的氣息。你們坐在木屋裡，聊天時，他/她突然問：“如果我離開了，你會怎麼辦？”你會：</h4>
-        <button onclick="selectAnswer(5, 'A')">A. 當然是不願意，告訴他/她你希望永遠和他/她在一起。</button>
-        <button onclick="selectAnswer(5, 'B')">B. 看著他/她，說出內心深處的真心話。</button>
-        <button onclick="selectAnswer(5, 'C')">C. 話語間帶著些許的遺憾，希望他/她能理解你的感受。</button>
-        <button onclick="selectAnswer(5, 'D')">D. 雖然感覺傷心，但還是會尊重他的選擇。</button>
-    </div>
-
-    <div class="question hidden" id="q6">
-        <h4>6. 你們終於來到了一個夢幻般的花園，四周開滿了各色的花朵，彷彿進入了童話世界。此時，他/她問你：“你願意和我一起迎接未來嗎？”你會：</h4>
-        <button onclick="selectAnswer(6, 'A')">A. 給予他/她肯定的回答，並深情地看著他/她的眼睛。</button>
-        <button onclick="selectAnswer(6, 'B')">B. 聽後心裡充滿幸福，笑著說：“當然。”</button>
-        <button onclick="selectAnswer(6, 'C')">C. 表示願意，但仍有些害羞，心跳加速。</button>
-        <button onclick="selectAnswer(6, 'D')">D. 思索片刻，認為這是一個重要的決定，需要更多時間考慮。</button>
+        <h4>3. 你們一起走到一片安靜的湖泊旁，夕陽正在下沉。你會怎麼做？</h4>
+        <button onclick="selectAnswer(3, 'A')">A. 坐下來靜靜地享受這美麗的時光，並告訴他/她你對未來的期待。</button>
+        <button onclick="selectAnswer(3, 'B')">B. 拿出相機，記錄這美好的一刻。</button>
+        <button onclick="selectAnswer(3, 'C')">C. 輕聲和他/她談談心，分享你心底的想法。</button>
+        <button onclick="selectAnswer(3, 'D')">D. 靜靜地坐著，並深呼吸，享受那份寧靜。</button>
     </div>
 
     <div id="result"></div>
@@ -110,10 +86,11 @@
         // 顯示下一題
         function selectAnswer(qNum, choice) {
             answers[qNum - 1] = choice;
-            document.getElementById('q' + qNum).style.display = 'none';
+            document.getElementById('q' + qNum).classList.add('hidden');
 
-            if (qNum < 6) {
-                document.getElementById('q' + (qNum + 1)).style.display = 'block';
+            // 確保下一題顯示
+            if (qNum < 3) {
+                document.getElementById('q' + (qNum + 1)).classList.remove('hidden');
             } else {
                 showResult();
             }
@@ -141,9 +118,27 @@
 
             finalResult = results[resultKey];
             document.getElementById('result').innerText = "你的戀愛代表人物是：" + finalResult;
-            document.getElementById('actions').style.display = 'block';
+            document.getElementById('actions').classList.remove('hidden');
         }
 
         function copyResult() {
             const text = "我在戀愛探險測驗中的結果是：" + finalResult + "，快來測試看看！";
-            navigator
+            navigator.clipboard.writeText(text).then(() => {
+                alert("已複製分享文字！");
+            });
+        }
+
+        function resetQuiz() {
+            answers = [];
+            finalResult = '';
+            document.getElementById('result').innerText = '';
+            document.getElementById('actions').classList.add('hidden');
+
+            for (let i = 1; i <= 3; i++) {
+                document.getElementById('q' + i).classList.add('hidden');
+            }
+            document.getElementById('q1').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
