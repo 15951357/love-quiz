@@ -4,170 +4,127 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>戀愛代表人物測驗</title>
-  <style>   
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+  <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Noto Sans TC', sans-serif;
+      background: linear-gradient(to right, #fce4ec, #f3e5f5);
+      margin: 0;
       padding: 30px;
-      background-color: #FFC0CB;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      margin: 0;
-      color: #fff;
+      min-height: 100vh;
     }
     .container {
-      background-color: rgba(0, 0, 0, 0.7);
+      background: white;
       padding: 40px;
       border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
       max-width: 800px;
       width: 100%;
       text-align: center;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     h2 {
       font-size: 28px;
-      color: #A7C7E7;
+      color: #d81b60;
+      margin-bottom: 20px;
     }
     .question {
       display: none;
-      margin-bottom: 30px;
+      margin-bottom: 40px;
+      animation: fadeIn 0.8s ease-in-out;
     }
     .question h4 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      color: #F39C12;
+      font-size: 22px;
+      color: #7b1fa2;
+      margin-bottom: 25px;
     }
     button {
-      display: block;
-      background-color: #6A4C7C;
+      background: #f48fb1;
+      color: white;
       border: none;
-      border-radius: 10px;
-      color: #fff;
       padding: 15px;
       margin: 10px auto;
       font-size: 16px;
       width: 80%;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       cursor: pointer;
+      transition: all 0.3s ease;
     }
     button:hover {
-      background-color: #8E7A8D;
+      transform: scale(1.05);
+      background-color: #ec407a;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
     }
     #resultCard {
       display: none;
       background-color: #fff;
-      color: #000;
+      color: #333;
       padding: 30px;
-      border-radius: 15px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
       margin-top: 30px;
+      border: 1px solid #e0e0e0;
     }
     .result-title {
-      font-size: 24px;
+      font-size: 26px;
       font-weight: bold;
+      margin-bottom: 15px;
+      color: #c2185b;
+    }
+    .result-type {
+      font-size: 20px;
+      color: #7b1fa2;
       margin-bottom: 10px;
     }
     .result-desc {
       font-size: 18px;
       margin-bottom: 15px;
+      line-height: 1.6;
     }
     .quote {
       font-size: 16px;
       font-style: italic;
-      color: #555;
+      color: #757575;
+    }
+    #progressBar {
+      height: 8px;
+      background-color: #f8bbd0;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+    #progress {
+      height: 100%;
+      width: 0%;
+      background-color: #ec407a;
+      transition: width 0.5s ease;
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h2>戀愛代表人物測驗 💘</h2>
+    <div id="progressBar"><div id="progress"></div></div>
     <div id="intro">
       <p>透過這些問題，找出你最像哪位《排球少年》的戀愛代表人物！</p>
       <button onclick="startQuiz()">開始測驗</button>
     </div>
 
-    <!-- 問題區域 -->
-    <div class="question" id="q1">
-      <h4>1. 你最喜歡的告白方式是？</h4>
-      <button onclick="selectAnswer(0, 'A')">直接當面說出來！</button>
-      <button onclick="selectAnswer(0, 'B')">寫卡片慢慢傳達</button>
-      <button onclick="selectAnswer(0, 'C')">搞笑中突然認真</button>
-      <button onclick="selectAnswer(0, 'D')">假裝不經意地提起</button>
-    </div>
-
-    <div class="question" id="q2">
-      <h4>2. 在戀愛中，你會更在意對方的哪一點？</h4>
-      <button onclick="selectAnswer(1, 'A')">對方是否能理解我</button>
-      <button onclick="selectAnswer(1, 'B')">對方的幽默感</button>
-      <button onclick="selectAnswer(1, 'C')">對方的勇氣和決心</button>
-      <button onclick="selectAnswer(1, 'D')">對方的真誠和穩重</button>
-    </div>
-
-    <div class="question" id="q3">
-      <h4>3. 你喜歡的約會活動是？</h4>
-      <button onclick="selectAnswer(2, 'A')">浪漫的晚餐</button>
-      <button onclick="selectAnswer(2, 'B')">一起看電影或看展覽</button>
-      <button onclick="selectAnswer(2, 'C')">去戶外探險或旅行</button>
-      <button onclick="selectAnswer(2, 'D')">在家一起煮飯或玩遊戲</button>
-    </div>
-
-    <div class="question" id="q4">
-      <h4>4. 遇到困難時，你會怎麼做？</h4>
-      <button onclick="selectAnswer(3, 'A')">不服輸，努力克服</button>
-      <button onclick="selectAnswer(3, 'B')">尋求他人的幫助</button>
-      <button onclick="selectAnswer(3, 'C')">保持樂觀，等機會</button>
-      <button onclick="selectAnswer(3, 'D')">冷靜思考，找出解決方案</button>
-    </div>
-
-    <div class="question" id="q5">
-      <h4>5. 你對戀愛的態度是？</h4>
-      <button onclick="selectAnswer(4, 'A')">積極主動，爭取自己想要的</button>
-      <button onclick="selectAnswer(4, 'B')">自然發展，不強求</button>
-      <button onclick="selectAnswer(4, 'C')">以開玩笑的態度面對</button>
-      <button onclick="selectAnswer(4, 'D')">保持理智，細心考慮</button>
-    </div>
-
-    <div class="question" id="q6">
-      <h4>6. 如果戀愛關係遇到問題，你會？</h4>
-      <button onclick="selectAnswer(5, 'A')">直接討論，解決問題</button>
-      <button onclick="selectAnswer(5, 'B')">默默承受，等待時機</button>
-      <button onclick="selectAnswer(5, 'C')">用幽默化解尷尬</button>
-      <button onclick="selectAnswer(5, 'D')">先冷靜再決定是否溝通</button>
-    </div>
-
-    <div class="question" id="q7">
-      <h4>7. 你在戀愛中最看重的是？</h4>
-      <button onclick="selectAnswer(6, 'A')">信任和溝通</button>
-      <button onclick="selectAnswer(6, 'B')">情趣和趣味</button>
-      <button onclick="selectAnswer(6, 'C')">陪伴和支持</button>
-      <button onclick="selectAnswer(6, 'D')">彼此獨立的空間</button>
-    </div>
-
-    <div class="question" id="q8">
-      <h4>8. 在戀愛中，你更願意扮演哪種角色？</h4>
-      <button onclick="selectAnswer(7, 'A')">積極主動，掌控局面</button>
-      <button onclick="selectAnswer(7, 'B')">隨和，跟隨對方的步伐</button>
-      <button onclick="selectAnswer(7, 'C')">帶來快樂和幽默</button>
-      <button onclick="selectAnswer(7, 'D')">提供穩定和支持</button>
-    </div>
-
-    <div class="question" id="q9">
-      <h4>9. 當你看到對方有不開心的時候，你會怎麼做？</h4>
-      <button onclick="selectAnswer(8, 'A')">安慰並鼓勵對方</button>
-      <button onclick="selectAnswer(8, 'B')">開玩笑逗對方開心</button>
-      <button onclick="selectAnswer(8, 'C')">給對方空間，等對方自己好起來</button>
-      <button onclick="selectAnswer(8, 'D')">耐心聆聽，了解對方的困難</button>
-    </div>
-
-    <div class="question" id="q10">
-      <h4>10. 當戀愛關係不如預期時，你會選擇？</h4>
-      <button onclick="selectAnswer(9, 'A')">直接坦白，讓問題得到解決</button>
-      <button onclick="selectAnswer(9, 'B')">耐心等待，讓情感自然流動</button>
-      <button onclick="selectAnswer(9, 'C')">調整心態，保持樂觀</button>
-      <button onclick="selectAnswer(9, 'D')">選擇暫時冷靜，重新審視關係</button>
-    </div>
+    <!-- 問題區域會用 JS 動態顯示 -->
+    <div id="questions"></div>
 
     <!-- 結果顯示區 -->
     <div id="resultCard">
-      <div class="result-title" id="resultTitle"></div>
+      <div class="result-title" id="resultName"></div>
+      <div class="result-type" id="resultType"></div>
       <div class="result-desc" id="resultDesc"></div>
       <div class="quote" id="resultQuote"></div>
       <button onclick="resetQuiz()">重新測驗</button>
@@ -175,109 +132,129 @@
   </div>
 
   <script>
-    let answers = [];
-    let finalResult = '';
+    const questions = [
+      {
+        text: "1. 你最喜歡的告白方式是？",
+        options: ["直接當面說出來！", "寫卡片慢慢傳達", "搞笑中突然認真", "假裝不經意地提起"]
+      },
+      {
+        text: "2. 在戀愛中，你會更在意對方的哪一點？",
+        options: ["對方是否能理解我", "對方的幽默感", "對方的勇氣和決心", "對方的真誠和穩重"]
+      },
+      {
+        text: "3. 你喜歡的約會活動是？",
+        options: ["浪漫的晚餐", "一起看電影或看展覽", "去戶外探險或旅行", "在家一起煮飯或玩遊戲"]
+      },
+      {
+        text: "4. 遇到困難時，你會怎麼做？",
+        options: ["不服輸，努力克服", "尋求他人的幫助", "保持樂觀，等機會", "冷靜思考，找出解決方案"]
+      },
+      {
+        text: "5. 你對戀愛的態度是？",
+        options: ["積極主動，爭取自己想要的", "自然發展，不強求", "以開玩笑的態度面對", "保持理智，細心考慮"]
+      }
+    ];
 
-    // 開始測驗
+    const results = {
+      A: {
+        name: "日向翔陽",
+        type: "活力派戀愛代表",
+        desc: "你像日向翔陽，陽光又熱血，總是主動追愛毫不猶豫！",
+        quote: "「即使再小的努力，也要堅持下去！」"
+      },
+      B: {
+        name: "影山飛雄",
+        type: "冷靜派戀愛代表",
+        desc: "你像影山飛雄，不擅言詞但重感情，總在默默守護。",
+        quote: "「我不是不想，我只是不知道怎麼做。」"
+      },
+      C: {
+        name: "孤爪研磨",
+        type: "神秘派戀愛代表",
+        desc: "你像研磨，雖然安靜內斂，卻能給對方安定感。",
+        quote: "「我更喜歡觀察，但不代表我不在乎。」"
+      },
+      D: {
+        name: "黑尾鐵朗",
+        type: "成熟派戀愛代表",
+        desc: "你像黑尾鐵朗，幽默中帶著穩重，是戀愛中的靠山。",
+        quote: "「我會開玩笑，但我對你很認真。」"
+      }
+    };
+
+    let currentQuestion = 0;
+    let answers = [];
+
     function startQuiz() {
       document.getElementById('intro').style.display = 'none';
-      showQuestion(0); // 顯示第一題
+      renderQuestion();
     }
 
-    // 顯示下一題
-    function showQuestion(questionIndex) {
-      let question = document.getElementById('q' + (questionIndex + 1));
-      question.style.display = 'block';
+    function renderQuestion() {
+      const qDiv = document.getElementById('questions');
+      qDiv.innerHTML = '';
+
+      const question = questions[currentQuestion];
+      const questionEl = document.createElement('div');
+      questionEl.className = 'question';
+      questionEl.style.display = 'block';
+
+      const title = document.createElement('h4');
+      title.innerText = question.text;
+      questionEl.appendChild(title);
+
+      question.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.innerText = opt;
+        btn.onclick = () => selectAnswer(idx);
+        questionEl.appendChild(btn);
+      });
+
+      qDiv.appendChild(questionEl);
+      updateProgressBar();
     }
 
-    // 選擇答案
-    function selectAnswer(questionIndex, choice) {
-      answers[questionIndex] = choice;
-      document.getElementById('q' + (questionIndex + 1)).style.display = 'none';
-      
-      // 加入延遲後顯示下一題
-      setTimeout(() => {
-        // 檢查是否還有下一題
-        if (questionIndex < 9) {
-          showQuestion(questionIndex + 1);
-        } else {
-          calculateResult();
-        }
-      }, 1000); // 延遲 1 秒再顯示下一題
+    function selectAnswer(index) {
+      const map = ['A', 'B', 'C', 'D'];
+      answers.push(map[index]);
+
+      if (currentQuestion < questions.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        calculateResult();
+      }
     }
 
-    // 計算測驗結果
+    function updateProgressBar() {
+      const progress = document.getElementById('progress');
+      const percent = (currentQuestion / questions.length) * 100;
+      progress.style.width = percent + '%';
+    }
+
     function calculateResult() {
-      let result = '';
-      let maxCount = 0;
-      let resultMap = {
-        'A': 0,
-        'B': 0,
-        'C': 0,
-        'D': 0
-      };
-
-      // 統計每種選項的數量
-      for (let i = 0; i < answers.length; i++) {
-        resultMap[answers[i]]++;
-      }
-
-      // 找出最多的選項
-      for (let key in resultMap) {
-        if (resultMap[key] > maxCount) {
-          maxCount = resultMap[key];
-          finalResult = key;
-        }
-      }
-
-      showResult();
+      const count = { A: 0, B: 0, C: 0, D: 0 };
+      answers.forEach(a => count[a]++);
+      const resultKey = Object.keys(count).reduce((a, b) => count[a] > count[b] ? a : b);
+      showResult(resultKey);
     }
 
-    // 顯示測驗結果
-    function showResult() {
-      const resultData = {
-        A: {
-          name: "日向翔陽",
-          type: "領導型戀愛代表",
-          desc: "你像日向翔陽，總是充滿活力，積極主動。在戀愛中，你是那個會不顧一切去爭取自己愛的人！",
-          quote: "「即使再小的努力，也要堅持下去！」"
-        },
-        B: {
-          name: "影山飛雄",
-          type: "內斂型戀愛代表",
-          desc: "你像影山飛雄，雖然有些內向和高冷，但實際上很重視關係的深度。在戀愛中，你不會輕易表現自己，卻會在最需要的時候給予對方支持。",
-          quote: "「我不是不想，我只是不知道怎麼做。」"
-        },
-        C: {
-          name: "研磨",
-          type: "搞笑型戀愛代表",
-          desc: "你是快樂製造機，用笑聲與驚喜守護戀情！",
-          quote: "「不管怎樣，我都希望你開心。」"
-        },
-        D: {
-          name: "黑尾",
-          type: "穩重型戀愛代表",
-          desc: "你像黑尾，你總是冷靜且理性，能夠在關鍵時刻提供穩定的支持。",
-          quote: "「對的事，隨時都能做。」"
-        }
-      };
-
-      const result = resultData[finalResult];
-
-      // 顯示結果
-      document.getElementById('resultTitle').innerText = result.name;
-      document.getElementById('resultDesc').innerText = result.desc;
-      document.getElementById('resultQuote').innerText = result.quote;
-
+    function showResult(key) {
+      const r = results[key];
+      document.getElementById('questions').innerHTML = '';
+      document.getElementById('resultName').innerText = r.name;
+      document.getElementById('resultType').innerText = r.type;
+      document.getElementById('resultDesc').innerText = r.desc;
+      document.getElementById('resultQuote').innerText = r.quote;
       document.getElementById('resultCard').style.display = 'block';
     }
 
-    // 重新測驗
     function resetQuiz() {
+      currentQuestion = 0;
       answers = [];
-      finalResult = '';
       document.getElementById('resultCard').style.display = 'none';
       document.getElementById('intro').style.display = 'block';
+      document.getElementById('progress').style.width = '0%';
     }
   </script>
 </body>
