@@ -289,5 +289,49 @@
 
             for (let key in count) {
                 if (count[key] > max) {
-                    max = count
+                    max = count[key];
+                    resultKey = key;
+                }
+            }
+
+            finalResult = getResultText(resultKey);
+            document.getElementById('result').textContent = finalResult;
+            document.getElementById('actions').style.display = 'block';
+        }
+
+        function getResultText(resultKey) {
+            switch (resultKey) {
+                case 'A':
+                    return "你是領導型人物！你總是充滿自信，帶著對方一起走向未來。";
+                case 'B':
+                    return "你是照顧型人物！你總是細心照顧對方，讓對方感到溫暖。";
+                case 'C':
+                    return "你是活躍型人物！你讓愛情充滿樂趣與驚喜，總是充滿活力。";
+                case 'D':
+                    return "你是穩定型人物！你提供對方穩定的依靠，帶來安全感。";
+                default:
+                    return "請稍後再試。";
+            }
+        }
+
+        function copyResult() {
+            const resultText = finalResult;
+            navigator.clipboard.writeText(resultText).then(function() {
+                alert('結果已複製！你可以分享給朋友了。');
+            });
+        }
+
+        function resetQuiz() {
+            answers = [];
+            finalResult = '';
+            for (let i = 1; i <= 10; i++) {
+                document.getElementById('q' + i).style.display = 'none';
+            }
+            document.getElementById('q1').style.display = 'block';
+            document.getElementById('result').textContent = '';
+            document.getElementById('actions').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
 
