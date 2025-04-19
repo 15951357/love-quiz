@@ -7,57 +7,95 @@
         body {
             font-family: 'Arial', sans-serif;
             padding: 30px;
-            background-color: #f0e6f7; /* 背景顏色 */
-            color: #333;
             margin: 0;
+            background: linear-gradient(to right, #f5a623, #ff5e57); /* 漸變背景 */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-image: url('https://via.placeholder.com/1500'); /* 背景圖片 */
             background-size: cover;
+            color: white;
         }
+
         .container {
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            background-color: rgba(255, 255, 255, 0.9); /* 白色透明背景 */
             padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 80%;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
             max-width: 600px;
-        }
-        h2 {
             text-align: center;
-            font-size: 32px;
-            color: #5e2b8d; /* 標題顏色 */
         }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
+            color: #5e2b8d; /* 標題顏色 */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+        }
+
         .question {
             margin-bottom: 20px;
         }
+
         button {
-            margin: 5px;
-            padding: 12px 20px;
-            font-size: 16px;
             background-color: #6a1b9a; /* 按鈕顏色 */
             color: white;
+            padding: 15px 30px;
+            font-size: 18px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s ease-in-out;
+            margin: 10px 0;
+            width: 100%;
         }
+
         button:hover {
             background-color: #9c4dcc; /* 按鈕懸停顏色 */
-            transform: scale(1.05);
+            transform: scale(1.05); /* 放大效果 */
         }
+
         #result {
             font-weight: bold;
             color: darkred;
             margin-top: 20px;
-            text-align: center;
+            font-size: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
+
         #actions {
             margin-top: 20px;
-            text-align: center;
         }
+
+        #actions button {
+            background-color: #ff5e57;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            transition: 0.3s;
+        }
+
+        #actions button:hover {
+            background-color: #f97376;
+        }
+
+        /* 頁面進入動畫 */
+        .question {
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 音效 (選擇性) */
+        /* 可以選擇為按鈕加入音效或其他視覺效果 */
     </style>
 </head>
 <body>
@@ -155,4 +193,5 @@
     </script>
 </body>
 </html>
+
 
