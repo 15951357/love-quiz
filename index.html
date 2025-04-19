@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>戀愛代表人物測驗</title>
+    <style>
+        body { font-family: sans-serif; padding: 30px; max-width: 600px; margin: auto; }
+        .question { margin-bottom: 20px; }
+        button { margin: 5px; padding: 8px 12px; font-size: 14px; }
+        #result { font-weight: bold; color: darkred; margin-top: 20px; white-space: pre-line; }
+        #actions { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h2>戀愛代表人物測驗 💘</h2>
+
+    <div class="question" id="question-container"></div>
+
+    <div id="result"></div>
+    <div id="actions" style="display:none;">
+        <button onclick="copyResult()">📋 複製分享文字</button>
+        <button onclick="resetQuiz()">🔁 重新測驗</button>
+    </div>
+
+    <script>
+        const questions = [
+            { q: "1. 你最喜歡的約會方式是？", options: {
+                A: "一起去看電影", B: "隨便走走", C: "有趣的驚喜", D: "一起煮飯" } },
+            { q: "2. 你喜歡哪種戀愛風格？", options: {
+                A: "強勢又有主見", B: "貼心又細心", C: "浪漫又搞笑", D: "穩重又溫暖" } },
+            { q: "3. 愛情對你來說是？", options: {
+                A: "共同前進", B: "相互照顧", C: "浪漫童話", D: "安定生活" } },
+            { q: "4. 你在吵架時會？", options: {
+                A: "講道理解決", B: "冷靜後和好", C: "鬧一鬧又好回來", D: "盡量避免衝突" } },
+            { q: "5. 你最不能接受另一半什麼？", options: {
+                A: "沒想法", B: "不貼心", C: "無趣", D: "不穩定" } },
+            { q: "6. 你對「曖昧」的看法是？", options: {
+                A: "要快狠準", B: "慢慢了解", C: "曖昧最美", D: "確定再靠近" } },
+            { q: "7. 理想情人最吸引你的是？", options: {
+                A: "有目標有熱情", B: "善解人意", C: "愛玩會逗我笑", D: "成熟穩定" } },
+            { q: "8. 你在戀愛中是？", options: {
+                A: "主導一切", B: "全心付出", C: "情緒派", D: "低調穩重" } },
+            { q: "9. 如果感情遇到危機，你會？", options: {
+                A: "討論解決問題", B: "主動安撫對方", C: "先逃避一下", D: "冷靜分析再決定" } },
+            { q: "10. 你的戀愛口頭禪可能是？", options: {
+                A: "走吧，我帶你去", B: "你今天累不累？", C: "有驚喜要給你～", D: "別擔心，我在" } }
+        ];
+
+        const results = {
+            A: "勇敢的領導者 🦁\n你是天生的主導者，熱情、果斷，戀愛中喜歡主動出擊，是戀人心中的超級英雄！",
+            B: "溫柔的守護者 🐻\n你溫暖體貼，總是默默守護對方，是最有安全感的戀人典範～",
+            C: "浪漫的夢想家 🦄\n你充滿想像力與浪漫情懷，對愛情抱有童話般的憧憬，是浪漫派的代表！",
+            D: "安穩的陪伴者 🐢\n你重視穩定與陪伴，是可以長久走下去的戀人，像家人一樣溫暖～"
+        };
+
+        let currentQuestion = 0;
+        let answers = [];
+        let finalResult = '';
+
+        function renderQuestion() {
+            const container = document.getElementById("question-container");
+            container.innerHTML = '';
+
+            if (currentQuestion < questions.length) {
+                const q = questions[currentQuestion];
+                const qElem = document.createElement('div');
+                qElem.innerHTML = `<h4>${q.q}</h4>`;
+
+                for (let key in q.options) {
+                    const btn = document.createElement('button');
+                    btn.innerText = `${key}. ${q.options[key]}`;
+                    btn.onclick = () => selectAnswer(key);
+                    qElem.appendChild(btn);
+                }
+
+                container.appendChild(qElem);
+            } else {
+                showResult();
+            }
+        }
+
+        function selectAnswer(choice) {
+            answers.push(choice);
+            currentQuestion++;
+            renderQuestion();
+        }
+
+        function showResult() {
+            const count = { A: 0, B: 0, C: 0, D: 0 };
+            answers.forEach(a => count[a]++);
+            let max = 0;
+            let resultKey = 'A';
+
+            for (let key in count) {
+                if (count[key] > max) {
+                    max = count[key];
+                    resultKey = key;
+                }
+            }
+
+            finalResult = results[resultKey];
+            document.getElementById("question-container").style.display = "none";
+            document.getElementById("result").innerText = "你的戀愛代表人物是：\n\n" + finalResult;
+            document.getElementById("actions").style.display = "block";
+        }
+
+        function copyResult() {
+            const text = "我在戀愛代表人物測驗中是：\n" + finalResult + "\n快來測你的！";
+            navigator.clipboard.writeText(text).then(() => {
+                alert("已複製分享文字！");
+            });
+        }
+
+        function resetQuiz() {
+            currentQuestion = 0;
+            answers = [];
+            finalResult = '';
+            document.getElementById("question-container").style.display = "block";
+            document.getElementById("result").innerText = '';
+            document.getElementById("actions").style.display = "none";
+            renderQuestion();
+        }
+
+        // 啟動測驗
+        renderQuestion();
+    </script>
+</body>
+</html>
