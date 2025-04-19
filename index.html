@@ -48,7 +48,7 @@
 <body>
 
     <h2>戀愛探險測驗 💖</h2>
-    
+
     <div class="question" id="q1">
         <h4>1. 你和心儀的人在星空下散步，月光灑在你們的身上。突然，他/她停下來，對你微笑。你會怎麼做？</h4>
         <button onclick="selectAnswer(1, 'A')">A. 牽起他的手，感受這份美好的浪漫。</button>
@@ -90,19 +90,11 @@
     </div>
 
     <div class="question hidden" id="q6">
-        <h4>6. 你們一起在海邊度過了一個美麗的黃昏，彼此依偎著看著夕陽漸漸沉入海平線。此時，他/她輕輕靠在你肩膀上，你會：</h4>
-        <button onclick="selectAnswer(6, 'A')">A. 用手臂輕輕抱住他/她，感受那份溫暖與愛意。</button>
-        <button onclick="selectAnswer(6, 'B')">B. 靜靜地看著海面，享受彼此的安靜時光。</button>
-        <button onclick="selectAnswer(6, 'C')">C. 輕聲對他/她說：“謝謝你，這一切真美。”</button>
-        <button onclick="selectAnswer(6, 'D')">D. 你靜靜地笑著，感受到心底的柔情。</button>
-    </div>
-
-    <div class="question hidden" id="q7">
-        <h4>7. 你們終於來到了一個夢幻般的花園，四周開滿了各色的花朵，彷彿進入了童話世界。此時，他/她問你：“你願意和我一起迎接未來嗎？”你會：</h4>
-        <button onclick="selectAnswer(7, 'A')">A. 給予他/她肯定的回答，並深情地看著他/她的眼睛。</button>
-        <button onclick="selectAnswer(7, 'B')">B. 聽後心裡充滿幸福，笑著說：“當然。”</button>
-        <button onclick="selectAnswer(7, 'C')">C. 表示願意，但仍有些害羞，心跳加速。</button>
-        <button onclick="selectAnswer(7, 'D')">D. 思索片刻，認為這是一個重要的決定，需要更多時間考慮。</button>
+        <h4>6. 你們終於來到了一個夢幻般的花園，四周開滿了各色的花朵，彷彿進入了童話世界。此時，他/她問你：“你願意和我一起迎接未來嗎？”你會：</h4>
+        <button onclick="selectAnswer(6, 'A')">A. 給予他/她肯定的回答，並深情地看著他/她的眼睛。</button>
+        <button onclick="selectAnswer(6, 'B')">B. 聽後心裡充滿幸福，笑著說：“當然。”</button>
+        <button onclick="selectAnswer(6, 'C')">C. 表示願意，但仍有些害羞，心跳加速。</button>
+        <button onclick="selectAnswer(6, 'D')">D. 思索片刻，認為這是一個重要的決定，需要更多時間考慮。</button>
     </div>
 
     <div id="result"></div>
@@ -115,24 +107,43 @@
         let answers = [];
         let finalResult = '';
 
-        function changeBackground(scene) {
-            const body = document.body;
+        // 顯示下一題
+        function selectAnswer(qNum, choice) {
+            answers[qNum - 1] = choice;
+            document.getElementById('q' + qNum).style.display = 'none';
 
-            switch (scene) {
-                case 'starry_night':
-                    body.style.background = 'url(https://cdn.pixabay.com/photo/2018/08/14/20/09/sky-3601732_960_720.jpg) no-repeat center center fixed';
-                    break;
-                case 'flower_path':
-                    body.style.background = 'url(https://cdn.pixabay.com/photo/2017/05/12/12/23/spring-2300504_960_720.jpg) no-repeat center center fixed';
-                    break;
-                case 'sunset':
-                    body.style.background = 'url(https://cdn.pixabay.com/photo/2016/11/23/22/45/sunset-1851462_960_720.jpg) no-repeat center center fixed';
-                    break;
-                case 'beach':
-                    body.style.background = 'url(https://cdn.pixabay.com/photo/2018/06/14/10/51/sunset-3477111_960_720.jpg) no-repeat center center fixed';
-                    break;
-                case 'dreamy_garden':
-                    body.style.background = 'url(https://cdn.pixabay.com/photo/2018/03/14/10/26/garden-3224281_960_720.jpg) no-repeat center center fixed';
-                    break;
-               
+            if (qNum < 6) {
+                document.getElementById('q' + (qNum + 1)).style.display = 'block';
+            } else {
+                showResult();
+            }
+        }
 
+        function showResult() {
+            const count = { A: 0, B: 0, C: 0, D: 0 };
+            answers.forEach(a => count[a]++);
+            let max = 0;
+            let resultKey = 'A';
+
+            for (let key in count) {
+                if (count[key] > max) {
+                    max = count[key];
+                    resultKey = key;
+                }
+            }
+
+            const results = {
+                A: '你是浪漫的冒險家，總是渴望與心愛的人一起探索未來。',
+                B: '你是溫柔的守護者，對愛情充滿耐心與細心。',
+                C: '你是浪漫的夢想家，喜歡夢幻的世界與愛情故事。',
+                D: '你是穩重的戀人，對愛情充滿責任感和穩定性。'
+            };
+
+            finalResult = results[resultKey];
+            document.getElementById('result').innerText = "你的戀愛代表人物是：" + finalResult;
+            document.getElementById('actions').style.display = 'block';
+        }
+
+        function copyResult() {
+            const text = "我在戀愛探險測驗中的結果是：" + finalResult + "，快來測試看看！";
+            navigator
